@@ -14,6 +14,11 @@
           "size": 10
         }
       },
+      "link": {
+        "type": "dashboard",
+        "target": "target0",
+        "data": "data0"
+      },
       "arrow": 10,
       "text": "text0"
     },
@@ -21,6 +26,10 @@
       "order": 1,
       "type": "block",
       "style": {},
+      "link": {
+        "type": "content",
+        "target": "target1"
+      },
       "arrow": 20,
       "text": "text1"
     }

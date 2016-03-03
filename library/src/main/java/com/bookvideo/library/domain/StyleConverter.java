@@ -4,8 +4,8 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
-public class StyleDeserializer implements DomainDeserializer {
-    StyleDeserializer() {
+public class StyleConverter implements DomainConverter {
+    StyleConverter() {
 
     }
 

@@ -32,6 +32,7 @@ public class Dashboard {
         private String text;
         // TODO duration
         // TODO link
+        private Link link;
 
         public DashboardItem() {
 
@@ -55,6 +56,10 @@ public class Dashboard {
 
         public String getText() {
             return text;
+        }
+
+        public Link getLink() {
+            return link;
         }
     }
 

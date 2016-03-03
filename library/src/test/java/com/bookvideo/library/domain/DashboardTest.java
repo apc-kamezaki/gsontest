@@ -16,14 +16,16 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
 
-public class DashboardItemTest {
+public class DashboardTest {
     private Gson gson;
 
     @Before
     public void setUp() throws Exception {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        DashboardDeserializer dashboardDeserializer = new DashboardDeserializer();
-        dashboardDeserializer.apply(gsonBuilder);
+        DashboardConverter dashboardConverter = new DashboardConverter();
+        dashboardConverter.apply(gsonBuilder);
+        LinkConverter linkConverter = new LinkConverter();
+        linkConverter.apply(gsonBuilder);
         gson = gsonBuilder.create();
 
     }
@@ -52,11 +54,19 @@ public class DashboardItemTest {
             assertThat(item.getArrow(), is(10));
             assertThat(item.getText(), is("text0"));
 
+            // style
             Style style = item.getStyle();
             assertThat(style, is(notNullValue()));
             assertThat(style.getBackground().getColor(), is(0));
             assertThat(style.getFont().getName(), is("font0"));
             assertThat(style.getFont().getSize(), is(10));
+
+            // link
+            Link link = item.getLink();
+            assertThat(link, is(notNullValue()));
+            assertThat(link.getType(), is(Link.Type.DASHBOARD));
+            assertThat(link.getTarget(), is("target0"));
+            assertThat(link.getData(), is("data0"));
 
             assertThat(style.getBackground().getType(), is(Style.defaultType));
             assertThat(style.getLabel(), is(nullValue()));
@@ -79,6 +89,12 @@ public class DashboardItemTest {
             assertThat(style.getPadding(), is(nullValue()));
             assertThat(style.getFont(), is(nullValue()));
 
+            // link
+            Link link = item.getLink();
+            assertThat(link, is(notNullValue()));
+            assertThat(link.getType(), is(Link.Type.CONTENT));
+            assertThat(link.getTarget(), is("target1"));
+            assertThat(link.getData(), is(nullValue()));
         }
     }
 }
