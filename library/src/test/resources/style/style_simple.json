@@ -1,0 +1,27 @@
+{
+  "bg": {
+    "image": "bg_id",
+    "color": 1,
+    "type": "wide"
+  },
+  "padding": {
+    "h": 10,
+    "v": 20
+  },
+  "label": {
+    "bgImg": "label_bg_id",
+    "bgColor": 2,
+    "color": 3,
+    "align": "center",
+    "style": "height",
+    "borderColor": 4,
+    "borderSize": 30
+  },
+  "font": {
+    "name": "font_name",
+    "size": 40,
+    "color": 5,
+    "align": "right"
+  }
+
+}

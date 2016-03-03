@@ -1,0 +1,28 @@
+{
+  "restId": "dashboard_id",
+  "type": "grid",
+  "children":[
+    {
+      "order": 0,
+      "icon": "icon-id-0",
+      "style": {
+        "bg": {
+          "color": 0
+        },
+        "font": {
+          "name": "font0",
+          "size": 10
+        }
+      },
+      "arrow": 10,
+      "text": "text0"
+    },
+    {
+      "order": 1,
+      "type": "block",
+      "style": {},
+      "arrow": 20,
+      "text": "text1"
+    }
+  ]
+}
