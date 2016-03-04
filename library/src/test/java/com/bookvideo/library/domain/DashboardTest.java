@@ -11,10 +11,9 @@ import java.io.InputStreamReader;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class DashboardTest {
     private Gson gson;
@@ -22,8 +21,10 @@ public class DashboardTest {
     @Before
     public void setUp() throws Exception {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        DashboardConverterAdapter adapter = new DashboardConverterAdapter();
-        adapter.apply(gsonBuilder);
+        DocumentTypeConverterAdapter dtAdapter = new DocumentTypeConverterAdapter();
+        dtAdapter.apply(gsonBuilder);
+        DashboardConverterAdapter dashboardAdapter = new DashboardConverterAdapter();
+        dashboardAdapter.apply(gsonBuilder);
         LinkConverterAdapter linkConverter = new LinkConverterAdapter();
         linkConverter.apply(gsonBuilder);
         gson = gsonBuilder.create();
@@ -64,7 +65,7 @@ public class DashboardTest {
             // link
             Link link = item.getLink();
             assertThat(link, is(notNullValue()));
-            assertThat(link.getType(), is(Link.Type.DASHBOARD));
+            assertThat(link.getType(), is(DocumentType.DASHBOARD));
             assertThat(link.getTarget(), is("target0"));
             assertThat(link.getData(), is("data0"));
 
@@ -92,7 +93,7 @@ public class DashboardTest {
             // link
             Link link = item.getLink();
             assertThat(link, is(notNullValue()));
-            assertThat(link.getType(), is(Link.Type.CONTENT));
+            assertThat(link.getType(), is(DocumentType.CONTENT));
             assertThat(link.getTarget(), is("target1"));
             assertThat(link.getData(), is(nullValue()));
         }

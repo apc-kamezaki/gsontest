@@ -1,8 +1,8 @@
 package com.bookvideo.library.domain;
 
 public class Link {
-    public static final Type defaultType = Type.WELCOME;
-    private Type type;
+    public static final DocumentType defaultType = DocumentType.WELCOME;
+    private DocumentType type;
     private String target;
     private String data;
 
@@ -10,7 +10,7 @@ public class Link {
 
     }
 
-    public Type getType() {
+    public DocumentType getType() {
         return type;
     }
 
@@ -22,7 +22,4 @@ public class Link {
         return data;
     }
 
-    public enum Type {
-        WELCOME, DASHBOARD, CONTENT, MENU
-    }
 }
