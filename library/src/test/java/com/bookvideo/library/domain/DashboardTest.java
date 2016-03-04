@@ -34,7 +34,7 @@ public class DashboardTest {
     @Test
     public void shouldDeserializeJson() throws Exception {
         Dashboard dashboard;
-        try (InputStream is = getClass().getResourceAsStream("/style/dashboard_simple.json");
+        try (InputStream is = getClass().getResourceAsStream("/dashboard/dashboard_simple.json");
              InputStreamReader reader = new InputStreamReader(is)) {
             dashboard = gson.fromJson(reader, Dashboard.class);
         }

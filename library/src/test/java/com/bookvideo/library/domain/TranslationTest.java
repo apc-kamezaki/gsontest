@@ -29,7 +29,7 @@ public class TranslationTest {
     @Test
     public void shouldDeserializeJson() throws Exception {
         Translation translation;
-        try (InputStream is = getClass().getResourceAsStream("/style/translation_simple.json");
+        try (InputStream is = getClass().getResourceAsStream("/translation/translation_simple.json");
              InputStreamReader reader = new InputStreamReader(is)) {
             translation = gson.fromJson(reader, Translation.class);
         }
