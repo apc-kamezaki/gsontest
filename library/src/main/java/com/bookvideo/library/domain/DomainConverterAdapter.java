@@ -2,6 +2,6 @@ package com.bookvideo.library.domain;
 
 import com.google.gson.GsonBuilder;
 
-public interface DomainConverter {
+public interface DomainConverterAdapter {
     void apply(GsonBuilder gsonBuilder);
 }

@@ -19,8 +19,8 @@ public class StyleTest {
     @Before
     public void setUp() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        StyleConverter styleConverter = new StyleConverter();
-        styleConverter.apply(gsonBuilder);
+        StyleConverterAdapter adapter = new StyleConverterAdapter();
+        adapter.apply(gsonBuilder);
         gson = gsonBuilder.create();
     }
 

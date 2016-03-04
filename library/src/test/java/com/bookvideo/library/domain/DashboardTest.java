@@ -22,9 +22,9 @@ public class DashboardTest {
     @Before
     public void setUp() throws Exception {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        DashboardConverter dashboardConverter = new DashboardConverter();
-        dashboardConverter.apply(gsonBuilder);
-        LinkConverter linkConverter = new LinkConverter();
+        DashboardConverterAdapter adapter = new DashboardConverterAdapter();
+        adapter.apply(gsonBuilder);
+        LinkConverterAdapter linkConverter = new LinkConverterAdapter();
         linkConverter.apply(gsonBuilder);
         gson = gsonBuilder.create();
 
