@@ -1,9 +1,12 @@
 package com.bookvideo.library.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Collections;
 import java.util.List;
 
 public class Translation {
+    @SerializedName("restId")
     private String restaurantId;
     private String locale;
     private DocumentType type;

@@ -13,10 +13,6 @@ public class Style {
     private Label label;
     private Font font;
 
-    public Style() {
-
-    }
-
     public Background getBackground() {
         return background;
     }
@@ -39,10 +35,6 @@ public class Style {
         private int color;
         private Type type = defaultType;
 
-        public Background() {
-
-        }
-
         public String getImageId() {
             return imageId;
         }
@@ -60,10 +52,6 @@ public class Style {
     public static class Padding {
         private int h;
         private int v;
-
-        public Padding() {
-
-        }
 
         public int getHorizontalPadding() {
             return h;
@@ -84,10 +72,6 @@ public class Style {
         private LabelStyle style = defaultLabelStyle;
         private int borderColor;
         private int borderSize;
-
-        public Label() {
-
-        }
 
         public String getBackgroundImageId() {
             return backgroundImageId;
@@ -123,10 +107,6 @@ public class Style {
         private int size;
         private int color;
         private Align align = defaultAlign;
-
-        public Font() {
-
-        }
 
         public String getName() {
             return name;

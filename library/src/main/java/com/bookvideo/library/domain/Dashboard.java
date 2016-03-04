@@ -34,10 +34,6 @@ public class Dashboard {
         // TODO link
         private Link link;
 
-        public DashboardItem() {
-
-        }
-
         public int getOrder() {
             return order;
         }

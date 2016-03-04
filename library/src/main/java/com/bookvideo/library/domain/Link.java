@@ -6,10 +6,6 @@ public class Link {
     private String target;
     private String data;
 
-    public Link() {
-
-    }
-
     public DocumentType getType() {
         return type;
     }
