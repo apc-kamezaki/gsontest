@@ -40,7 +40,7 @@ public class DashboardTest {
         }
 
         assertThat(dashboard, is(notNullValue()));
-        assertThat(dashboard.getRestrauntId(), is("dashboard_id"));
+        assertThat(dashboard.getRestaurantId(), is("dashboard_id"));
         assertThat(dashboard.getType(), is(Dashboard.Type.GRID));
 
         assertThat(dashboard.getChildren(), is(notNullValue()));

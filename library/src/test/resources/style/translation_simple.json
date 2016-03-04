@@ -1,0 +1,15 @@
+{
+  "restaurantId": "translation_restaurant",
+  "locale": "en",
+  "type": "dashboard",
+  "translation": [
+    {
+      "key": "key_1",
+      "value": "value_1"
+    },
+    {
+      "key": "key_2",
+      "value": "value_2"
+    }
+  ]
+}

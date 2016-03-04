@@ -7,12 +7,12 @@ import java.util.List;
 
 public class Dashboard {
     @SerializedName("restId")
-    private String restrauntId;
+    private String restaurantId;
     private Type type;
     private List<DashboardItem> children;
 
-    public String getRestrauntId() {
-        return restrauntId;
+    public String getRestaurantId() {
+        return restaurantId;
     }
 
     public Type getType() {
@@ -20,7 +20,7 @@ public class Dashboard {
     }
 
     public List<DashboardItem> getChildren() {
-        return Collections.unmodifiableList(children);
+        return children != null ? Collections.unmodifiableList(children) : Collections.<DashboardItem>emptyList();
     }
 
     public static class DashboardItem {
