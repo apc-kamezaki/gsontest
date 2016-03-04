@@ -1,0 +1,27 @@
+{
+  "restId": "welcome_restId",
+  "style":{
+    "bg": {
+      "image": "bg_id",
+      "color": 1,
+      "type": "wide"
+    },
+    "font": {
+      "name": "font_name",
+      "size": 40,
+      "color": 5,
+      "align": "right"
+    }
+  },
+  "lang" : [
+    "en", "fr"
+  ],
+  "ads": {
+    "catchPhrase": "ad phrase",
+    "link": {
+      "type": "menu",
+      "target": "menu target",
+      "data": "ad data"
+    }
+  }
+}
