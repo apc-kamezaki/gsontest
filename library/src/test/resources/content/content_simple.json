@@ -1,0 +1,83 @@
+{
+  "restId": "content_restaurant_id",
+  "type": "content",
+  "style": {
+    "bg": {
+      "color": 1,
+      "type": "wide"
+    },
+    "padding": {
+      "h": 10,
+      "v": 20
+    }
+  },
+  "pages" : [
+    {
+      "title": "page1",
+      "order": 10,
+      "duration": "not supported yet",
+      "children": [
+        {
+          "type": "text",
+          "order": 100,
+          "text": "item 1-1",
+          "style": {
+            "font": {
+              "name": "font_name",
+              "align": "right"
+            }
+          },
+          "link": {
+            "type": "content",
+            "target": "target1",
+            "data": "data1"
+          }
+        }
+      ]
+    },
+    {
+      "title": "page2",
+      "order": 20,
+      "duration": "not supported yet",
+      "children": [
+        {
+          "type": "image",
+          "order": 200,
+          "text": "item 2-1",
+          "style": {
+            "bg": {
+              "image": "bg_id",
+              "color": 1,
+              "type": "crop"
+            }
+          },
+          "link": {
+            "type": "menu",
+            "target": "target2-1",
+            "data": "data2-1"
+          }
+        },
+        {
+          "type": "contact",
+          "order": 210,
+          "text": "item 2-2",
+          "style": {
+            "font": {
+              "name": "font_name",
+              "size": 40,
+              "color": 5,
+              "align": "right"
+            }
+          },
+          "link": {
+            "type": "dashboard",
+            "target": "target2-2",
+            "data": "data2-2"
+          }
+        }
+      ]
+
+    }
+
+  ]
+}
