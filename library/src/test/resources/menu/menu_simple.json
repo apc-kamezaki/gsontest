@@ -1,0 +1,39 @@
+{
+  "restId": "menu_id",
+  "style": {
+    "label": {
+      "bgColor": 2,
+      "color": 3,
+      "align": "center",
+      "style": "height"
+    }
+  },
+  "pages": [
+    {
+      "title": "page1",
+      "order": 10,
+      "categories": [
+        {
+          "id": "category 1-1",
+          "order": 1
+        }
+      ]
+    },
+    {
+      "title": "page2",
+      "order": 20,
+      "categories": [
+        {
+          "id": "category 2-1",
+          "order": 2
+        },
+        {
+          "id": "category 2-2",
+          "order": 3
+        }
+      ]
+
+    }
+  ]
+
+}
