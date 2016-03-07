@@ -9,8 +9,9 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static org.hamcrest.CoreMatchers.*;
-
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 public class WelcomeTest {

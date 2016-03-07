@@ -1,0 +1,31 @@
+[
+  {
+    "type": "in",
+    "desc": "description"
+  },
+  {
+    "type": "full",
+    "size": "quarter",
+    "desc": null
+  },
+  {
+    "type": "full",
+    "size": "third",
+    "desc": null
+  },
+  {
+    "type": "full",
+    "size": "half",
+    "desc": "description for half"
+  },
+  {
+    "type": "full",
+    "size": "full",
+    "desc": "description for full"
+  },
+  {
+    "type": "none",
+    "size": "none",
+    "desc": "description for none"
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "restId": "menuitem_restaurant_id",
+  "categoryId": "category_id",
+  "style" : {
+    "font": {
+      "name": "font_name",
+      "size": 40,
+      "color": 5,
+      "align": "right"
+    }
+  },
+  "title": "Title",
+  "desc": "Description",
+  "info": {
+    "type": "full",
+    "size": "half",
+    "desc": "Info description"
+  },
+  "prices":[
+    3.0, 0.0, 5.0
+  ],
+  "suggestions": [
+    "suggest1_id", "suggest2_id"
+  ],
+  "ingredients": [
+    "ingredients1", "ingredients2", "ingredients3", "ingredients4"
+  ],
+  "calories": 321.0,
+  "alcohol": "Alcohol string",
+  "alg": [
+    "eggs"
+  ],
+  "semiotic": [
+    "halal", "veg"
+  ],
+  "millesime": "text",
+  "measure": "measure text",
+  "country": {
+    "name": "us"
+  },
+  "region": {
+    "name": "Texas",
+    "country": "us"
+  },
+  "cepage": {
+    "name": "Name of cepage"
+  },
+  "culture": "Text of culture"
+}

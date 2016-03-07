@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class TranslationTest {
     private Gson gson;
