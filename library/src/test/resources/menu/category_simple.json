@@ -1,0 +1,30 @@
+{
+  "restId": "category id",
+  "style": {
+    "bg": {
+      "image": "bg_id",
+      "color": 1,
+      "type": "crop"
+    }
+  },
+  "title": "Category title",
+  "desc": "Category description",
+  "type": "wine",
+  "typeCols": [
+    "col-1", "col-2", "col-3"
+  ],
+  "items": [
+    {
+      "id": "item-1",
+      "order": 1
+    },
+    {
+      "id": "item-2",
+      "order": 3
+    },
+    {
+      "id": "item-3",
+      "order": 2
+    }
+  ]
+}
