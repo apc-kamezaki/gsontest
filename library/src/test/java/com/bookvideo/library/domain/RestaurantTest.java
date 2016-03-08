@@ -1,7 +1,6 @@
 package com.bookvideo.library.domain;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import org.junit.Before;
@@ -23,13 +22,7 @@ public class RestaurantTest {
 
     @Before
     public void setUp() throws Exception {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        new DocumentTypeConverterAdapter().apply(gsonBuilder);
-        new LinkConverterAdapter().apply(gsonBuilder);
-        new StyleConverterAdapter().apply(gsonBuilder);
-        new DurationConverterAdapter().apply(gsonBuilder);
-        new RestaurantConverterAdapter().apply(gsonBuilder);
-        gson = gsonBuilder.create();
+        gson = GsonCreator.getInstance().createGson();
     }
 
     @Test

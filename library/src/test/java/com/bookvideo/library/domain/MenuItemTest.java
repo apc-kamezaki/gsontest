@@ -1,7 +1,6 @@
 package com.bookvideo.library.domain;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,13 +19,7 @@ public class MenuItemTest {
 
     @Before
     public void setUp() throws Exception {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        new ImageSizeConverterAdapter().apply(gsonBuilder);
-        new AllergenConverterAdapter().apply(gsonBuilder);
-        new SemioticConverterAdapter().apply(gsonBuilder);
-        new StyleConverterAdapter().apply(gsonBuilder);
-        new MenuItemConverterAdapter().apply(gsonBuilder);
-        gson = gsonBuilder.create();
+        gson = GsonCreator.getInstance().createGson();
     }
 
     @Test

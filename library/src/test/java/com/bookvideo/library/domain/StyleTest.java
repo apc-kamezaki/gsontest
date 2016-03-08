@@ -1,7 +1,6 @@
 package com.bookvideo.library.domain;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,10 +17,7 @@ public class StyleTest {
     private Gson gson;
     @Before
     public void setUp() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        StyleConverterAdapter adapter = new StyleConverterAdapter();
-        adapter.apply(gsonBuilder);
-        gson = gsonBuilder.create();
+        gson = GsonCreator.getInstance().createGson();
     }
 
     @Test

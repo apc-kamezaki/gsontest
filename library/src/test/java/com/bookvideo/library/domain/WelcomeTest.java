@@ -1,7 +1,6 @@
 package com.bookvideo.library.domain;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,12 +18,7 @@ public class WelcomeTest {
 
     @Before
     public void setUp() throws Exception {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        DocumentTypeConverterAdapter documentAdapter = new DocumentTypeConverterAdapter();
-        documentAdapter.apply(gsonBuilder);
-        WelcomeConverterAdapter welcomeAdapter = new WelcomeConverterAdapter();
-        welcomeAdapter.apply(gsonBuilder);
-        gson = gsonBuilder.create();
+        gson = GsonCreator.getInstance().createGson();
     }
 
     @Test

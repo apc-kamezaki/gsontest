@@ -1,7 +1,6 @@
 package com.bookvideo.library.domain;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,12 +17,7 @@ public class TranslationTest {
 
     @Before
     public void setUp() throws Exception {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        DocumentTypeConverterAdapter dtAdapter = new DocumentTypeConverterAdapter();
-        dtAdapter.apply(gsonBuilder);
-        TranslationConverterAdapter translationAdapter = new TranslationConverterAdapter();
-        translationAdapter.apply(gsonBuilder);
-        gson = gsonBuilder.create();
+        gson = GsonCreator.getInstance().createGson();
     }
 
     @Test
