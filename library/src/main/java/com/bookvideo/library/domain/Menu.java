@@ -26,7 +26,7 @@ public class Menu {
     public static class Page {
         private String title;
         private int order;
-        // TODO duration
+        private Duration duration;
         private List<Item> categories;
 
         public String getTitle() {
@@ -37,10 +37,13 @@ public class Menu {
             return order;
         }
 
+        public Duration getDuration() {
+            return duration;
+        }
+
         public List<Item> getCategories() {
             return categories != null ? Collections.unmodifiableList(categories) : Collections.<Item>emptyList();
         }
-
     }
 
     public static class Item {

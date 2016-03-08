@@ -16,7 +16,7 @@ public class MenuItem {
     @SerializedName("desc")
     private String description;
     private Info info;
-    // TODO duration
+    private Duration duration;
     private List<Float> prices;
     private List<String> suggestions;
     private List<String> ingredients;
@@ -54,6 +54,10 @@ public class MenuItem {
 
     public Info getInfo() {
         return info;
+    }
+
+    public Duration getDuration() {
+        return duration;
     }
 
     public List<Float> getPrices() {

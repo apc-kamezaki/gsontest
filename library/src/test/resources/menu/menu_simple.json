@@ -12,6 +12,11 @@
     {
       "title": "page1",
       "order": 10,
+      "duration": {
+        "days": [
+          "tu"
+        ]
+      },
       "categories": [
         {
           "id": "category 1-1",

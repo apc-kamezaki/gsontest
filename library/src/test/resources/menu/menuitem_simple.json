@@ -16,6 +16,9 @@
     "size": "half",
     "desc": "Info description"
   },
+  "duration": {
+    "days": [ "sa", "su" ]
+  },
   "prices":[
     3.0, 0.0, 5.0
   ],

@@ -50,7 +50,9 @@ public class MenuItemTest {
             assertThat(info.getSize(), is(ImageSize.HALF));
             assertThat(info.getDescription(), is("Info description"));
         }
-        assertThat(menuItem.getPrices().size(), is(3));
+        assertThat(menuItem.getDuration(), is(notNullValue()));
+        assertThat(menuItem.getDuration().getDays(), contains(Duration.DayOfWeek.SAT, Duration.DayOfWeek.SUN));
+        assertThat(menuItem.getPrices(), hasSize(3));
         assertThat(menuItem.getPrices(), contains(3.0f, 0.0f, 5.0f));
         assertThat(menuItem.getSuggestions().size(), is(2));
         assertThat(menuItem.getSuggestions(), contains("suggest1_id", "suggest2_id"));

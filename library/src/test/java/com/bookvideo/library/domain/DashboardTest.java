@@ -53,6 +53,10 @@ public class DashboardTest {
             assertThat(style.getFont().getName(), is("font0"));
             assertThat(style.getFont().getSize(), is(10));
 
+            // duration
+            Duration duration = item.getDuration();
+            assertThat(duration, is(nullValue()));
+
             // link
             Link link = item.getLink();
             assertThat(link, is(notNullValue()));
@@ -80,6 +84,12 @@ public class DashboardTest {
             assertThat(style.getLabel(), is(nullValue()));
             assertThat(style.getPadding(), is(nullValue()));
             assertThat(style.getFont(), is(nullValue()));
+
+            // duration
+            Duration duration = item.getDuration();
+            assertThat(duration, is(notNullValue()));
+            assertThat(duration.getStart(), is("20151231"));
+            assertThat(duration.getEnd(), is("20160101"));
 
             // link
             Link link = item.getLink();

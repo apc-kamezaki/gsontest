@@ -15,7 +15,10 @@
     {
       "title": "page1",
       "order": 10,
-      "duration": "not supported yet",
+      "duration": {
+        "start": "20160301",
+        "end": "20160331"
+      },
       "children": [
         {
           "type": "text",
@@ -38,7 +41,6 @@
     {
       "title": "page2",
       "order": 20,
-      "duration": "not supported yet",
       "children": [
         {
           "type": "image",

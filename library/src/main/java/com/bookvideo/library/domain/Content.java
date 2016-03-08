@@ -34,7 +34,7 @@ public class Content {
     public static class ContentPage {
         private String title;
         private int order;
-        // TODO duration
+        private Duration duration;
         List<ContentItem> children;
 
         public String getTitle() {
@@ -43,6 +43,10 @@ public class Content {
 
         public int getOrder() {
             return order;
+        }
+
+        public Duration getDuration() {
+            return duration;
         }
 
         public List<ContentItem> getChildren() {
