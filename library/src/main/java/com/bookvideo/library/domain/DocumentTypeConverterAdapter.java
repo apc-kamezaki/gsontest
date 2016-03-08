@@ -17,7 +17,7 @@ public class DocumentTypeConverterAdapter implements DomainConverterAdapter {
             try {
                 return DocumentType.valueOf(json.getAsJsonPrimitive().getAsString().toUpperCase());
             } catch (Exception e) {
-                return Link.defaultType;
+                return null;
             }
         }
     }

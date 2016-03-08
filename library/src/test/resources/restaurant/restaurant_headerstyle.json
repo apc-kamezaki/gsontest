@@ -1,0 +1,7 @@
+{
+  "img": "Header image id",
+  "color": 10,
+  "bgColor": 20,
+  "backLabel": "BACK",
+  "homeLabel": "HOME"
+}
