@@ -19,6 +19,7 @@ public class MenuItemTest {
     public void setUp() throws Exception {
         GsonBuilder gsonBuilder = new GsonBuilder();
         new ImageSizeConverterAdapter().apply(gsonBuilder);
+        new AllergenConverterAdapter().apply(gsonBuilder);
         new SemioticConverterAdapter().apply(gsonBuilder);
         new StyleConverterAdapter().apply(gsonBuilder);
         new MenuItemConverterAdapter().apply(gsonBuilder);
@@ -60,7 +61,7 @@ public class MenuItemTest {
         assertThat(menuItem.getCalories(), is(321.0f));
         assertThat(menuItem.getAlcohol(), is("Alcohol string"));
         assertThat(menuItem.getAlg().size(), is(1));
-        assertThat(menuItem.getAlg(), contains("eggs"));
+        assertThat(menuItem.getAlg(), contains(Allergen.NUTS));
         assertThat(menuItem.getSemiotics().size(), is(2));
         assertThat(menuItem.getSemiotics(), contains(Semiotic.HALAL, Semiotic.VEG));
         assertThat(menuItem.getMillesime(), is("text"));
@@ -70,5 +71,23 @@ public class MenuItemTest {
         assertThat(menuItem.getRegion().getCountry(), is("us"));
         assertThat(menuItem.getCepage().getName(), is("Name of cepage"));
         assertThat(menuItem.getCulture(), is("Text of culture"));
+    }
+
+    @Test
+    public void shouldDeserializeAllergen() throws Exception {
+        MenuItem menuItem;
+        try (InputStream is = getClass().getResourceAsStream("/menu/menuitem_allergen.json");
+             InputStreamReader reader = new InputStreamReader(is)) {
+            menuItem = gson.fromJson(reader, MenuItem.class);
+        }
+
+        assertThat(menuItem, is(notNullValue()));
+        assertThat(menuItem.getAlg(), hasSize(4));
+        assertThat(menuItem.getAlg(),
+                contains(Allergen.NUTS,
+                        Allergen.CELERY,
+                        Allergen.MILK,
+                        Allergen.MUSTARD));
+
     }
 }

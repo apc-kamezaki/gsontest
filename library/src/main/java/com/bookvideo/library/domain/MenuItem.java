@@ -22,7 +22,7 @@ public class MenuItem {
     private List<String> ingredients;
     private float calories;
     private String alcohol;
-    private List<String> alg;   // TODO to be defined Allergen enum
+    private List<Allergen> alg;
     @SerializedName("semiotic")
     private List<Semiotic> semiotics;
     private String millesime;
@@ -76,8 +76,8 @@ public class MenuItem {
         return alcohol;
     }
 
-    public List<String> getAlg() {
-        return alg != null ?  Collections.unmodifiableList(alg) : Collections.<String>emptyList();
+    public List<Allergen> getAlg() {
+        return alg != null ?  Collections.unmodifiableList(alg) : Collections.<Allergen>emptyList();
     }
 
     public List<Semiotic> getSemiotics() {
