@@ -11,8 +11,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 
@@ -34,7 +33,7 @@ public class MediaTest {
         }
 
         assertThat(mediaList, is(notNullValue()));
-        assertThat(mediaList.size(), is(3));
+        assertThat(mediaList, hasSize(3));
 
         // media 1
         {
@@ -53,4 +52,23 @@ public class MediaTest {
         }
     }
 
+    @Test
+    public void shouldDeserializeImageSize() throws Exception {
+        List<ImageSize> sizeList;
+        try (InputStream is = getClass().getResourceAsStream("/media/image_imagesize.json");
+             InputStreamReader reader = new InputStreamReader(is)) {
+            Type listType = new TypeToken<List<ImageSize>>(){}.getType();
+            sizeList = gson.fromJson(reader, listType);
+        }
+
+        assertThat(sizeList, is(notNullValue()));
+        assertThat(sizeList, hasSize(6));
+        assertThat(sizeList, contains(
+                ImageSize.NONE,
+                ImageSize.QUARTER,
+                ImageSize.THIRD,
+                ImageSize.HALF,
+                ImageSize.FULL,
+                ImageSize.NONE));
+    }
 }

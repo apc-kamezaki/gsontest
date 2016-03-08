@@ -1,16 +1,17 @@
 package com.bookvideo.library.domain;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 public class ContentTest {
@@ -97,7 +98,47 @@ public class ContentTest {
                 assertThat(item.getLink().getType(), is(DocumentType.DASHBOARD));
             }
         }
+    }
 
+    @Test
+    public void shouldDeserializeContentType() throws Exception {
+        List<Content.ContentType> contentTypes;
+        try (InputStream is = getClass().getResourceAsStream("/content/content_contenttype.json");
+             InputStreamReader reader = new InputStreamReader(is)) {
+            Type listType = new TypeToken<List<Content.ContentType>>(){}.getType();
+            contentTypes = gson.fromJson(reader, listType);
+        }
+
+        assertThat(contentTypes, is(notNullValue()));
+        assertThat(contentTypes, hasSize(4));
+        assertThat(contentTypes, contains(
+                Content.ContentType.CONTENT,
+                Content.ContentType.AGENDA,
+                Content.ContentType.GALLERY,
+                null));
+
+    }
+
+    @Test
+    public void shouldDeserializeContentItemType() throws Exception {
+        List<Content.ContentItemType> itemTypes;
+        try (InputStream is = getClass().getResourceAsStream("/content/content_contentitemtype.json");
+             InputStreamReader reader = new InputStreamReader(is)) {
+            Type listType = new TypeToken<List<Content.ContentItemType>>(){}.getType();
+            itemTypes = gson.fromJson(reader, listType);
+        }
+
+        assertThat(itemTypes, is(notNullValue()));
+        assertThat(itemTypes, hasSize(9));
+        assertThat(itemTypes, contains(null,
+                Content.ContentItemType.LINE,
+                Content.ContentItemType.TEXT,
+                Content.ContentItemType.TITLE,
+                Content.ContentItemType.IMAGE,
+                Content.ContentItemType.SPACE,
+                Content.ContentItemType.MAP,
+                Content.ContentItemType.CONTACT,
+                Content.ContentItemType.SERVICE));
 
     }
 }

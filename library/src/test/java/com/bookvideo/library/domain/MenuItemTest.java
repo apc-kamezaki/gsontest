@@ -88,4 +88,22 @@ public class MenuItemTest {
                         Allergen.MUSTARD));
 
     }
+
+    @Test
+    public void shouldDeserializeSemiotic() throws Exception {
+        MenuItem menuItem;
+        try (InputStream is = getClass().getResourceAsStream("/menu/menuitem_semiotic.json");
+             InputStreamReader reader = new InputStreamReader(is)) {
+            menuItem = gson.fromJson(reader, MenuItem.class);
+        }
+
+        assertThat(menuItem, is(notNullValue()));
+        assertThat(menuItem.getSemiotics(), hasSize(4));
+        assertThat(menuItem.getSemiotics(), contains(
+                Semiotic.HALAL,
+                Semiotic.KOSHER,
+                Semiotic.VEG,
+                null));
+
+    }
 }

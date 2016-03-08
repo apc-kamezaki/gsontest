@@ -18,7 +18,7 @@ public class ContentConverterAdapter implements DomainConverterAdapter {
             try {
                 return Content.ContentType.valueOf(json.getAsJsonPrimitive().getAsString().toUpperCase());
             } catch (Exception e) {
-                return Content.defaultContentType;
+                return null;
             }
         }
     }
@@ -30,7 +30,7 @@ public class ContentConverterAdapter implements DomainConverterAdapter {
             try {
                 return Content.ContentItemType.valueOf(json.getAsJsonPrimitive().getAsString().toUpperCase());
             } catch (Exception e) {
-                return Content.defaultContentItemType;
+                return null;
             }
         }
     }

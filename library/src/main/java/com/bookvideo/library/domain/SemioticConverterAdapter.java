@@ -18,7 +18,7 @@ public class SemioticConverterAdapter implements DomainConverterAdapter {
             try {
                 return Semiotic.valueOf(json.getAsJsonPrimitive().getAsString().toUpperCase());
             } catch (Exception e) {
-                return Semiotic.NONE;
+                return null;
             }
         }
     }

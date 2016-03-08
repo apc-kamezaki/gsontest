@@ -22,7 +22,7 @@ public class DashboardConverterAdapter implements DomainConverterAdapter {
             try {
                 return Dashboard.Type.valueOf(json.getAsJsonPrimitive().getAsString().toUpperCase());
             } catch (Exception e) {
-                return Dashboard.Type.LINE;
+                return null;
             }
         }
     }

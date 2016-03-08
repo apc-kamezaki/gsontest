@@ -1,17 +1,17 @@
 package com.bookvideo.library.domain;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.util.List;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 public class DashboardTest {
@@ -98,5 +98,24 @@ public class DashboardTest {
             assertThat(link.getTarget(), is("target1"));
             assertThat(link.getData(), is(nullValue()));
         }
+    }
+
+    @Test
+    public void shouldDeserializeDashboardType() throws Exception {
+        List<Dashboard.Type> types;
+        try (InputStream is = getClass().getResourceAsStream("/dashboard/dashboard_type.json");
+             InputStreamReader reader = new InputStreamReader(is)) {
+            Type listType = new TypeToken<List<Dashboard.Type>>(){}.getType();
+            types = gson.fromJson(reader, listType);
+        }
+
+        assertThat(types, is(notNullValue()));
+        assertThat(types, hasSize(5));
+        assertThat(types, contains(
+                Dashboard.Type.COL,
+                Dashboard.Type.GRID,
+                Dashboard.Type.BLOCK,
+                Dashboard.Type.LINE,
+                null));
     }
 }

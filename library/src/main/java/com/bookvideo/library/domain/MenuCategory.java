@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class MenuCategory {
-    public static final CategoryType defaultType = CategoryType.MAIN;
 
     @SerializedName("restId")
     private String restaurantId;
@@ -59,6 +58,7 @@ public class MenuCategory {
             return order;
         }
     }
+
     public enum CategoryType {
         MAIN, WINE, ALCOHOL
     }

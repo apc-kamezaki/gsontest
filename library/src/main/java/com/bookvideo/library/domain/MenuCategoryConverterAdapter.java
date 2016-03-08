@@ -17,7 +17,7 @@ public class MenuCategoryConverterAdapter implements DomainConverterAdapter {
             try {
                 return MenuCategory.CategoryType.valueOf(json.getAsJsonPrimitive().getAsString().toUpperCase());
             } catch (Exception e) {
-                return MenuCategory.CategoryType.MAIN;
+                return null;
             }
         }
     }

@@ -6,9 +6,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Content {
-    public static final ContentType defaultContentType = ContentType.CONTENT;
-    public static final ContentItemType defaultContentItemType = ContentItemType.SPACE;
-
     @SerializedName("restId")
     private String restaurantId;
     private ContentType type;

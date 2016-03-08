@@ -1,16 +1,17 @@
 package com.bookvideo.library.domain;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.util.List;
 
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 public class MenuCategoryTest {
@@ -63,5 +64,23 @@ public class MenuCategoryTest {
 
             }
         }
+    }
+
+    @Test
+    public void shouldDeserializeCategoryType() throws Exception {
+        List<MenuCategory.CategoryType> categoryTypes;
+        try (InputStream is = getClass().getResourceAsStream("/menu/category_type.json");
+             InputStreamReader reader = new InputStreamReader(is)) {
+            Type listType = new TypeToken<List<MenuCategory.CategoryType>>(){}.getType();
+            categoryTypes = gson.fromJson(reader, listType);
+        }
+
+        assertThat(categoryTypes, is(notNullValue()));
+        assertThat(categoryTypes, hasSize(4));
+        assertThat(categoryTypes, contains(
+                MenuCategory.CategoryType.MAIN,
+                MenuCategory.CategoryType.WINE,
+                MenuCategory.CategoryType.ALCOHOL,
+                null));
     }
 }
