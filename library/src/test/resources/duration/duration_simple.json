@@ -1,0 +1,8 @@
+{
+  "timeslot": "Timeslot string",
+  "start": "Start day",
+  "end": "End day",
+  "days": [
+    "mo", "fi"
+  ]
+}
