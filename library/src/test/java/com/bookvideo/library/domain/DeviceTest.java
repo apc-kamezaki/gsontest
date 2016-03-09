@@ -31,6 +31,55 @@ public class DeviceTest {
     }
 
     @Test
+    public void shouldDeserializeBattery() throws Exception {
+        Device.Battery battery;
+        try (InputStream is = getClass().getResourceAsStream("/device/device_battery.json");
+             InputStreamReader reader = new InputStreamReader(is)) {
+            battery = gson.fromJson(reader, Device.Battery.class);
+        }
+
+        assertThat(battery, is(notNullValue()));
+        assertThat(battery.getLevel(), is(50));
+        assertThat(battery.getStatus(), is(Device.BatteryStatus.CHARGING));
+        assertThat(battery.getCharge(), is(notNullValue()));
+        assertThat(battery.getCharge().getPluggedTimes().size(), is(1));
+        assertThat(battery.getCharge().getDispluggedTimes().size(), is(1));
+        assertThat(battery.getHealth(), is(Device.BatteryHealth.OVERHEAT));
+    }
+
+    @Test
+    public void shouldSerializeBattery() throws Exception {
+        Device.BatteryCharge charge = new Device.BatteryCharge();
+        charge.addPluggedTimes(10);
+        charge.addDispluggedTime(1);
+        charge.addDispluggedTime(2);
+        Device.Battery battery = new Device.Battery();
+        battery.setLevel(20);
+        battery.setStatus(Device.BatteryStatus.FULL);
+        battery.setCharge(charge);
+        battery.setHealth(Device.BatteryHealth.GOOD);
+
+        String jsonString = gson.toJson(battery, Device.Battery.class);
+        JsonElement element = gson.fromJson(jsonString, JsonElement.class);
+        assertThat(element, is(notNullValue()));
+        assertThat(element.isJsonObject(), is(true));
+        JsonObject batteryJson = element.getAsJsonObject();
+        assertThat(batteryJson.has("level"), is(true));
+        assertThat(batteryJson.get("level").getAsInt(), is(battery.getLevel()));
+        assertThat(batteryJson.has("status"), is(true));
+        assertThat(batteryJson.get("status").getAsString(), is(battery.getStatus().name().toLowerCase()));
+        assertThat(batteryJson.has("charge"), is(true));
+        assertThat(batteryJson.get("charge").isJsonObject(), is(true));
+        JsonObject chargeJson = batteryJson.get("charge").getAsJsonObject();
+        assertThat(chargeJson.has("pluggedTime"), is(true));
+        assertThat(chargeJson.get("pluggedTime").isJsonArray(), is(true));
+        assertThat(chargeJson.has("displuggedTime"), is(true));
+        assertThat(chargeJson.get("displuggedTime").isJsonArray(), is(true));
+        assertThat(batteryJson.has("health"), is(true));
+        assertThat(batteryJson.get("health").getAsString(), is(battery.getHealth().name().toLowerCase()));
+    }
+
+    @Test
     public void shouldDeserializeApplicationStatus() throws Exception {
         List<Device.ApplicationStatus> statusList;
         try (InputStream is = getClass().getResourceAsStream("/device/device_applicationstatus.json");

@@ -1,0 +1,9 @@
+{
+  "level": 50,
+  "status": "charging",
+  "charge": {
+    "pluggedTime": [ 0 ],
+    "displuggedTime": [ 1 ]
+  },
+  "health": "overheat"
+}
