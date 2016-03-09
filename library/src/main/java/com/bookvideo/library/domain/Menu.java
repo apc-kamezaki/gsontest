@@ -26,7 +26,7 @@ public class Menu {
     public static class Page {
         private String title;
         private int order;
-        private Duration duration;
+        private List<Duration> durations;
         private List<Item> categories;
 
         public String getTitle() {
@@ -37,8 +37,8 @@ public class Menu {
             return order;
         }
 
-        public Duration getDuration() {
-            return duration;
+        public List<Duration> getDurations() {
+            return durations != null ? Collections.unmodifiableList(durations) : Collections.<Duration>emptyList();
         }
 
         public List<Item> getCategories() {

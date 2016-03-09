@@ -26,10 +26,12 @@
       "order": 1,
       "type": "block",
       "style": {},
-      "duration": {
-        "start": "20151231",
-        "end": "20160101"
-      },
+      "durations": [
+        {
+          "start": "20151231",
+          "end": "20160101"
+        }
+      ],
       "link": {
         "type": "content",
         "target": "target1"

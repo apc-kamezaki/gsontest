@@ -54,8 +54,7 @@ public class DashboardTest {
             assertThat(style.getFont().getSize(), is(10));
 
             // duration
-            Duration duration = item.getDuration();
-            assertThat(duration, is(nullValue()));
+            assertThat(item.getDurations(), hasSize(0));
 
             // link
             Link link = item.getLink();
@@ -86,10 +85,7 @@ public class DashboardTest {
             assertThat(style.getFont(), is(nullValue()));
 
             // duration
-            Duration duration = item.getDuration();
-            assertThat(duration, is(notNullValue()));
-            assertThat(duration.getStart(), is("20151231"));
-            assertThat(duration.getEnd(), is("20160101"));
+            assertThat(item.getDurations(), hasSize(1));
 
             // link
             Link link = item.getLink();

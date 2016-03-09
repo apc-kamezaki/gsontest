@@ -12,11 +12,17 @@
     {
       "title": "page1",
       "order": 10,
-      "duration": {
-        "days": [
-          "tu"
-        ]
-      },
+      "durations":[
+        {
+          "days": [
+            "tu"
+          ]
+        },
+        {
+          "start": "20151231",
+          "end": "20160101"
+        }
+      ],
       "categories": [
         {
           "id": "category 1-1",

@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
@@ -47,11 +48,8 @@ public class MenuTest {
             Menu.Page page = menu.getPages().get(0);
             assertThat(page.getTitle(), is("page1"));
             assertThat(page.getOrder(), is(10));
-            {
-                // duration
-                assertThat(page.getDuration(), is(notNullValue()));
-                assertThat(page.getDuration().getDays(), contains(Duration.DayOfWeek.TUE));
-            }
+            // duration
+            assertThat(page.getDurations(), hasSize(2));
             {
                 // categories
                 assertThat(page.getCategories().size(), is(1));
@@ -70,10 +68,8 @@ public class MenuTest {
             Menu.Page page = menu.getPages().get(1);
             assertThat(page.getTitle(), is("page2"));
             assertThat(page.getOrder(), is(20));
-            {
-                // duration
-                assertThat(page.getDuration(), is(nullValue()));
-            }
+            // duration
+            assertThat(page.getDurations(), hasSize(0));
             {
                 // categories
                 assertThat(page.getCategories().size(), is(2));

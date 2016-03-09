@@ -30,7 +30,7 @@ public class Dashboard {
         private Style style;
         private int arrow;
         private String text;
-        private Duration duration;
+        private List<Duration> durations;
         private Link link;
 
         public int getOrder() {
@@ -53,8 +53,8 @@ public class Dashboard {
             return text;
         }
 
-        public Duration getDuration() {
-            return duration;
+        public List<Duration> getDurations() {
+            return durations != null ? Collections.unmodifiableList(durations) : Collections.<Duration>emptyList();
         }
 
         public Link getLink() {
