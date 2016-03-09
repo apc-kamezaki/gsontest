@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -255,4 +256,54 @@ public class DeviceTest {
             assertThat(item.getAsJsonPrimitive().getAsString(), is(healths.get(i).name().toLowerCase()));
         }
     }
+
+    @Test
+    public void shouldDeserializeBatteryCharge() throws Exception {
+        Device.BatteryCharge charge;
+        try (InputStream is = getClass().getResourceAsStream("/device/device_batterycharge.json");
+             InputStreamReader reader = new InputStreamReader(is)) {
+            charge = gson.fromJson(reader, Device.BatteryCharge.class);
+        }
+
+        assertThat(charge, is(notNullValue()));
+        assertThat(charge.getPluggedTimes(), hasSize(3));
+        assertThat(charge.getPluggedTimes(), contains(1, 2, 3));
+        assertThat(charge.getDispluggedTimes(), hasSize(2));
+        assertThat(charge.getDispluggedTimes(), contains(10, 20));
+    }
+
+    @Test
+    public void shouldSerializeBatteryCharge() throws Exception {
+        Device.BatteryCharge charge = new Device.BatteryCharge();
+        charge.addPluggedTimes(10);
+        charge.addPluggedTimes(20);
+        charge.addDispluggedTime(100);
+
+        String jsonString = gson.toJson(charge, Device.BatteryCharge.class);
+
+        JsonElement element = gson.fromJson(jsonString, JsonElement.class);
+        assertThat(element.isJsonObject(), is(true));
+        JsonObject chargeJson = element.getAsJsonObject();
+        assertThat(chargeJson.has("pluggedTime"), is(true));
+        assertThat(chargeJson.get("pluggedTime").isJsonArray(), is(true));
+        JsonArray pluggedArray = chargeJson.getAsJsonArray("pluggedTime");
+        assertThat(pluggedArray.size(), is(charge.getPluggedTimes().size()));
+        for (int i = 0; i < pluggedArray.size(); i++) {
+            JsonElement item = pluggedArray.get(i);
+            assertThat(item.isJsonPrimitive(), is(true));
+            assertThat(item.getAsJsonPrimitive().isNumber(),is(true));
+            assertThat(item.getAsInt(), is(charge.getPluggedTimes().get(i)));
+        }
+        assertThat(chargeJson.has("displuggedTime"), is(true));
+        assertThat(chargeJson.get("displuggedTime").isJsonArray(), is(true));
+        JsonArray displuggedArray = chargeJson.getAsJsonArray("displuggedTime");
+        assertThat(displuggedArray.size(), is(charge.getDispluggedTimes().size()));
+        for (int i = 0; i < displuggedArray.size(); i++) {
+            JsonElement item = displuggedArray.get(i);
+            assertThat(item.isJsonPrimitive(), is(true));
+            assertThat(item.getAsJsonPrimitive().isNumber(),is(true));
+            assertThat(item.getAsInt(), is(charge.getDispluggedTimes().get(i)));
+        }
+    }
+
 }

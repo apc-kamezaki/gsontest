@@ -116,10 +116,7 @@ public class Device {
     public static class Battery {
         private int level;
         private BatteryStatus status;
-        @SerializedName("pluggedTime")
-        private List<Integer> pluggedTimes = new ArrayList<>();
-        @SerializedName("displuggedTime")
-        private List<Integer> displuggedTimes = new ArrayList<>();
+        private BatteryCharge charge;
         private BatteryHealth health;
 
         public int getLevel() {
@@ -138,20 +135,12 @@ public class Device {
             this.status = status;
         }
 
-        public List<Integer> getPluggedTimes() {
-            return Collections.unmodifiableList(pluggedTimes);
+        public BatteryCharge getCharge() {
+            return charge;
         }
 
-        public void addPluggedTime(int pluggedTime) {
-            pluggedTimes.add(pluggedTime);
-        }
-
-        public List<Integer> getDispluggedTimes() {
-            return Collections.unmodifiableList(displuggedTimes);
-        }
-
-        public void addDispluggedTime(int displuggedTime) {
-            displuggedTimes.add(displuggedTime);
+        public void setCharge(BatteryCharge charge) {
+            this.charge = charge;
         }
 
         public BatteryHealth getHealth() {
@@ -160,6 +149,37 @@ public class Device {
 
         public void setHealth(BatteryHealth health) {
             this.health = health;
+        }
+    }
+
+    public static class BatteryCharge {
+        @SerializedName("pluggedTime")
+        private List<Integer> pluggedTimes;
+        @SerializedName("displuggedTime")
+        private List<Integer> displuggedTimes;
+
+        public List<Integer> getPluggedTimes() {
+            return pluggedTimes != null
+                    ? Collections.unmodifiableList(pluggedTimes) : Collections.<Integer>emptyList();
+        }
+
+        public void addPluggedTimes(int pluggedTime) {
+            if (pluggedTimes == null) {
+                pluggedTimes = new ArrayList<>();
+            }
+            pluggedTimes.add(pluggedTime);
+        }
+
+        public List<Integer> getDispluggedTimes() {
+            return displuggedTimes != null
+                    ? Collections.unmodifiableList(displuggedTimes) : Collections.<Integer>emptyList();
+        }
+
+        public void addDispluggedTime(int displuggedTime) {
+            if (displuggedTimes == null) {
+                displuggedTimes = new ArrayList<>();
+            }
+            displuggedTimes.add(displuggedTime);
         }
     }
 
