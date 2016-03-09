@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -28,6 +27,37 @@ public class DeviceTest {
     @Before
     public void setUp() throws Exception {
         gson = GsonCreator.getInstance().createGson();
+    }
+
+    @Test
+    public void shouldDeserializeLocation() throws Exception {
+        Device.Location location;
+        try (InputStream is = getClass().getResourceAsStream("/device/device_location.json");
+             InputStreamReader reader = new InputStreamReader(is)) {
+            location = gson.fromJson(reader, Device.Location.class);
+        }
+
+        assertThat(location, is(notNullValue()));
+        assertThat(location.getType(), is(Device.LocationType.OFFICE));
+        assertThat(location.getSettedAt(), is(100));
+        assertThat(location.getLocation(), is("location text"));
+    }
+
+    @Test
+    public void shouldSerializeLocation() throws Exception {
+        Device.Location location = new Device.Location(Device.LocationType.RESTAURANT, 200, "MONACO");
+
+        String jsonString = gson.toJson(location, Device.Location.class);
+
+        JsonElement element = gson.fromJson(jsonString, JsonElement.class);
+        assertThat(element.isJsonObject(), is(true));
+        JsonObject locationJson = element.getAsJsonObject();
+        assertThat(locationJson.has("type"), is(true));
+        assertThat(locationJson.get("type").getAsInt(), is(location.getType().getLocationValue()));
+        assertThat(locationJson.has("settedAt"), is(true));
+        assertThat(locationJson.get("settedAt").getAsInt(), is(location.getSettedAt()));
+        assertThat(locationJson.has("location"), is(true));
+        assertThat(locationJson.get("location").getAsString(), is(location.getLocation()));
     }
 
     @Test
@@ -147,7 +177,7 @@ public class DeviceTest {
     @Test
     public void shouldDeserializeLocationType() throws Exception {
         List<Device.LocationType> locationTypeList;
-        try (InputStream is = getClass().getResourceAsStream("/device/device_location.json");
+        try (InputStream is = getClass().getResourceAsStream("/device/device_locationtype.json");
              InputStreamReader reader = new InputStreamReader(is)) {
             Type listType = new TypeToken<List<Device.LocationType>>(){}.getType();
             locationTypeList = gson.fromJson(reader, listType);
