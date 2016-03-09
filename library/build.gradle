@@ -32,5 +32,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
 }
 
-
-apply from: "$rootDir/gradle/android-check.gradle"
+apply plugin: 'checkstyle'
+task checkstyle(type: Checkstyle) {
+    configFile file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+}
