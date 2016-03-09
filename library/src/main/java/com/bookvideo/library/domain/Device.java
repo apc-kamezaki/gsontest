@@ -9,16 +9,16 @@ import java.util.List;
 public class Device {
     private int location = 0;
     private List<Location> locations;
-    @SerializedName("lastRest")
+    @SerializedName("lastResto")
     private String lastRestaurant;
     private DeviceStatus status;
     private Battery battery;
     @SerializedName("bvUpdate")
-    private List<ApplicationStatus> appStatusList = new ArrayList<>();
+    private List<ApplicationStatus> appStatusList;
     @SerializedName("updater")
-    private List<ApplicationStatus> updaterStatusList = new ArrayList<>();
+    private List<ApplicationStatus> updaterStatusList;
     @SerializedName("bvData")
-    private List<ApplicationStatus> dataStatusList = new ArrayList<>();
+    private List<ApplicationStatus> dataStatusList;
 
     public int getLocation() {
         return location;
@@ -29,11 +29,14 @@ public class Device {
     }
 
     public List<Location> getLocations() {
-        return locations;
+        return locations != null ? Collections.unmodifiableList(locations) : Collections.<Location>emptyList();
     }
 
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
+    public void addToLocations(Location location) {
+        if (locations == null) {
+            locations = new ArrayList<>();
+        }
+        locations.add(location);
     }
 
     public String getLastRestaurant() {
@@ -61,27 +64,39 @@ public class Device {
     }
 
     public List<ApplicationStatus> getAppStatusList() {
-        return Collections.unmodifiableList(appStatusList);
+        return appStatusList != null
+                ? Collections.unmodifiableList(appStatusList) : Collections.<ApplicationStatus>emptyList();
     }
 
     public void addAppStatus(ApplicationStatus status) {
+        if (appStatusList == null) {
+            appStatusList = new ArrayList<>();
+        }
         appStatusList.add(status);
     }
 
 
     public List<ApplicationStatus> getUpdaterStatusList() {
-        return Collections.unmodifiableList(updaterStatusList);
+        return updaterStatusList != null
+                ? Collections.unmodifiableList(updaterStatusList) : Collections.<ApplicationStatus>emptyList();
     }
 
     public void addUpdaterStatusList(ApplicationStatus status) {
+        if (updaterStatusList == null) {
+            updaterStatusList = new ArrayList<>();
+        }
         updaterStatusList.add(status);
     }
 
     public List<ApplicationStatus> getDataStatusList() {
-        return Collections.unmodifiableList(dataStatusList);
+        return dataStatusList != null
+                ? Collections.unmodifiableList(dataStatusList) : Collections.<ApplicationStatus>emptyList();
     }
 
     public void addDataStatusList(ApplicationStatus status) {
+        if (dataStatusList == null) {
+            dataStatusList = new ArrayList<>();
+        }
         dataStatusList.add(status);
     }
 

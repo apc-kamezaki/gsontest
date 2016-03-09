@@ -30,6 +30,74 @@ public class DeviceTest {
     }
 
     @Test
+    public void shouldDeserializeJson() throws Exception {
+        Device device;
+        try (InputStream is = getClass().getResourceAsStream("/device/device_simple.json");
+             InputStreamReader reader = new InputStreamReader(is)) {
+            device = gson.fromJson(reader, Device.class);
+        }
+
+        assertThat(device, is(notNullValue()));
+        assertThat(device.getLocations(), hasSize(2));
+        assertThat(device.getLastRestaurant(), is("last restaurant"));
+        assertThat(device.getStatus(), is(Device.DeviceStatus.ONLINE));
+        assertThat(device.getBattery(), is(notNullValue()));
+        assertThat(device.getBattery().getLevel(), is(20));
+        assertThat(device.getAppStatusList(), hasSize(2));
+        assertThat(device.getUpdaterStatusList(), hasSize(1));
+        assertThat(device.getDataStatusList(), hasSize(3));
+    }
+
+    @Test
+    public void shouldSerializeJson() throws Exception {
+        Device device = new Device();
+        device.addToLocations(new Device.Location(Device.LocationType.RESTAURANT, 1, "new location 1"));
+        device.addToLocations(new Device.Location(Device.LocationType.OFFICE, 2, "new location 2"));
+        device.setLastRestaurant("last restaurant");
+        device.setStatus(Device.DeviceStatus.OFFLINE);
+        Device.Battery battery = new Device.Battery();
+        battery.setLevel(100);
+        battery.setStatus(Device.BatteryStatus.NOT_CHARGING);
+        Device.BatteryCharge charge = new Device.BatteryCharge();
+        charge.addPluggedTimes(100);
+        charge.addDispluggedTime(101);
+        battery.setCharge(charge);
+        device.setBattery(battery);
+        device.addAppStatus(new Device.ApplicationStatus(1, 10, 100));
+        device.addUpdaterStatusList(new Device.ApplicationStatus(2, 20));
+        device.addUpdaterStatusList(new Device.ApplicationStatus(3, 30));
+        device.addDataStatusList(new Device.ApplicationStatus(4, 40));
+        device.addDataStatusList(new Device.ApplicationStatus(5, 50));
+        device.addDataStatusList(new Device.ApplicationStatus(6, 60));
+        device.setLocation(1000);
+
+        String jsonString = gson.toJson(device, Device.class);
+        JsonElement element = gson.fromJson(jsonString, JsonElement.class);
+        assertThat(element.isJsonObject(), is(true));
+        JsonObject deviceJson = element.getAsJsonObject();
+        assertThat(deviceJson.has("locations"), is(true));
+        assertThat(deviceJson.get("locations").isJsonArray(), is(true));
+        JsonArray locationsArray = deviceJson.getAsJsonArray("locations");
+        assertThat(locationsArray.size(), is(device.getLocations().size()));
+        assertThat(deviceJson.has("lastResto"), is(true));
+        assertThat(deviceJson.get("lastResto").getAsString(), is(device.getLastRestaurant()));
+        assertThat(deviceJson.has("status"), is(true));
+        assertThat(deviceJson.get("status").getAsString(), is(device.getStatus().name().toLowerCase()));
+        assertThat(deviceJson.has("battery"), is(true));
+        assertThat(deviceJson.get("battery").isJsonObject(), is(true));
+        assertThat(deviceJson.has("bvUpdate"), is(true));
+        assertThat(deviceJson.get("bvUpdate").isJsonArray(), is(true));
+        assertThat(deviceJson.getAsJsonArray("bvUpdate").size(), is(device.getAppStatusList().size()));
+        assertThat(deviceJson.has("updater"), is(true));
+        assertThat(deviceJson.get("updater").isJsonArray(), is(true));
+        assertThat(deviceJson.getAsJsonArray("updater").size(), is(device.getUpdaterStatusList().size()));
+        assertThat(deviceJson.has("bvData"), is(true));
+        assertThat(deviceJson.get("bvData").isJsonArray(), is(true));
+        assertThat(deviceJson.getAsJsonArray("bvData").size(), is(device.getDataStatusList().size()));
+
+    }
+
+    @Test
     public void shouldDeserializeLocation() throws Exception {
         Device.Location location;
         try (InputStream is = getClass().getResourceAsStream("/device/device_location.json");

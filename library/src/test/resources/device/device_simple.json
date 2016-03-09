@@ -1,0 +1,59 @@
+{
+  "_id": "global id",
+  "locations": [
+    {
+      "type": 0,
+      "settedAt": 1,
+      "location": "location 1"
+    },
+    {
+      "type": 1,
+      "settedAt": 2,
+      "location": "location 2"
+    }
+  ],
+  "lastResto": "last restaurant",
+  "status": "online",
+  "battery": {
+    "level": 20,
+    "status": "full",
+    "charge": {
+      "pluggedTime": [ 1 ],
+      "displuggedTime": [ 100 ]
+    },
+    "health": "good"
+  },
+  "bvUpdate": [
+    {
+      "installedTime": 1,
+      "version": 10,
+      "openedTime": 100
+    },
+    {
+      "installedTime": 2,
+      "version": 20,
+      "openedTime": 200
+    }
+  ],
+  "updater": [
+    {
+      "installedTime": 3,
+      "version": 30
+    }
+  ],
+  "bvData": [
+    {
+      "installedTime": 4,
+      "version": 40
+    },
+    {
+      "installedTime": 5,
+      "version": 50
+    },
+    {
+      "installedTime": 6,
+      "version": 60
+    }
+  ],
+  "location": 123
+}
