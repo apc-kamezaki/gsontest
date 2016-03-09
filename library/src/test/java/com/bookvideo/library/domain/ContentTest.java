@@ -46,9 +46,7 @@ public class ContentTest {
             Content.ContentPage page = content.getPages().get(0);
             assertThat(page.getTitle(), is("page1"));
             assertThat(page.getOrder(), is(10));
-            assertThat(page.getDuration(), is(notNullValue()));
-            assertThat(page.getDuration().getStart(), is("20160301"));
-            assertThat(page.getDuration().getEnd(), is("20160331"));
+            assertThat(page.getDurations(), hasSize(2));
             assertThat(page.getChildren().size(), is(1));
 
             {
@@ -71,7 +69,7 @@ public class ContentTest {
             // page2
             Content.ContentPage page = content.getPages().get(1);
             assertThat(page.getTitle(), is("page2"));
-            assertThat(page.getDuration(), is(nullValue()));
+            assertThat(page.getDurations(), hasSize(0));
             assertThat(page.getOrder(), is(20));
 
             {

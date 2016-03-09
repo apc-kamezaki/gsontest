@@ -31,7 +31,7 @@ public class Content {
     public static class ContentPage {
         private String title;
         private int order;
-        private Duration duration;
+        private List<Duration> durations;
         List<ContentItem> children;
 
         public String getTitle() {
@@ -42,8 +42,8 @@ public class Content {
             return order;
         }
 
-        public Duration getDuration() {
-            return duration;
+        public List<Duration> getDurations() {
+            return durations != null ? Collections.unmodifiableList(durations) : Collections.<Duration>emptyList();
         }
 
         public List<ContentItem> getChildren() {

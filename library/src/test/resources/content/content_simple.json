@@ -15,10 +15,16 @@
     {
       "title": "page1",
       "order": 10,
-      "duration": {
-        "start": "20160301",
-        "end": "20160331"
-      },
+      "durations": [
+        {
+          "start": "20160301",
+          "end": "20160331"
+        },
+        {
+          "start": "20160401",
+          "end": "20160430"
+        }
+      ],
       "children": [
         {
           "type": "text",
