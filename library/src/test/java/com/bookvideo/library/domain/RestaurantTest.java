@@ -46,14 +46,14 @@ public class RestaurantTest {
         {
             // service 1
             Duration duration = restaurant.getServices().get(0);
-            assertThat(duration.getTimeslot(), is("Timeslot string 1"));
+            assertThat(duration.getTimeslot(), is(Duration.TimeSlot.MORNING));
             assertThat(duration.getDays(), hasSize(2));
             assertThat(duration.getDays(), contains(Duration.DayOfWeek.MON, Duration.DayOfWeek.FRI));
         }
         {
             // service 2
             Duration duration = restaurant.getServices().get(1);
-            assertThat(duration.getTimeslot(), is("Timeslot string 2"));
+            assertThat(duration.getTimeslot(), is(Duration.TimeSlot.LUNCH));
             assertThat(duration.getDays(), hasSize(0));
         }
         assertThat(restaurant.getHeaderStyle(), is(notNullValue()));

@@ -9,7 +9,7 @@
   "currency": "USD",
   "services": [
     {
-      "timeslot": "Timeslot string 1",
+      "timeslot": "morning",
       "start": "Start day 1",
       "end": "End day 1",
       "days": [
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "timeslot": "Timeslot string 2",
+      "timeslot": "lunch",
       "start": "Start day 2",
       "end": "End day 2"
     }

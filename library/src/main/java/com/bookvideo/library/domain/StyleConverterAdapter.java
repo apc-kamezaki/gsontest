@@ -11,12 +11,12 @@ public class StyleConverterAdapter implements DomainConverterAdapter {
 
     @Override
     public void apply(GsonBuilder gsonBuilder) {
-        gsonBuilder.registerTypeAdapter(Style.Type.class, new StyleTypeDeserializer());
-        gsonBuilder.registerTypeAdapter(Style.Align.class, new StyleAlignDeserializer());
-        gsonBuilder.registerTypeAdapter(Style.LabelStyle.class, new StyleLabelStyleDeserializer());
+        gsonBuilder.registerTypeAdapter(Style.Type.class, new StyleTypeConvereter());
+        gsonBuilder.registerTypeAdapter(Style.Align.class, new StyleAlignConverter());
+        gsonBuilder.registerTypeAdapter(Style.LabelStyle.class, new StyleLabelStyleConverter());
     }
 
-    private static class StyleTypeDeserializer implements JsonDeserializer<Style.Type> {
+    private static class StyleTypeConvereter implements JsonDeserializer<Style.Type> {
         @Override
         public Style.Type deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
                 throws JsonParseException {
@@ -28,7 +28,7 @@ public class StyleConverterAdapter implements DomainConverterAdapter {
         }
     }
 
-    private static class StyleAlignDeserializer implements JsonDeserializer<Style.Align> {
+    private static class StyleAlignConverter implements JsonDeserializer<Style.Align> {
         @Override
         public Style.Align deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
                 throws JsonParseException {
@@ -40,7 +40,7 @@ public class StyleConverterAdapter implements DomainConverterAdapter {
         }
     }
 
-    private static class StyleLabelStyleDeserializer implements JsonDeserializer<Style.LabelStyle> {
+    private static class StyleLabelStyleConverter implements JsonDeserializer<Style.LabelStyle> {
         @Override
         public Style.LabelStyle deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
                 throws JsonParseException {

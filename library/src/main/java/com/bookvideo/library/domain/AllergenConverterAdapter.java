@@ -7,10 +7,10 @@ import java.lang.reflect.Type;
 public class AllergenConverterAdapter implements DomainConverterAdapter {
     @Override
     public void apply(GsonBuilder gsonBuilder) {
-        gsonBuilder.registerTypeAdapter(Allergen.class, new AllergenDeserializer());
+        gsonBuilder.registerTypeAdapter(Allergen.class, new AllergenConverter());
     }
 
-    private static class AllergenDeserializer implements JsonDeserializer<Allergen> {
+    private static class AllergenConverter implements JsonDeserializer<Allergen> {
 
         @Override
         public Allergen deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

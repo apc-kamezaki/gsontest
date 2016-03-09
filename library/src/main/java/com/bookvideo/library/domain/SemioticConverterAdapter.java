@@ -7,10 +7,10 @@ import java.lang.reflect.Type;
 public class SemioticConverterAdapter implements DomainConverterAdapter {
     @Override
     public void apply(GsonBuilder gsonBuilder) {
-        gsonBuilder.registerTypeAdapter(Semiotic.class, new SemioticDeserializer());
+        gsonBuilder.registerTypeAdapter(Semiotic.class, new SemioticConvereter());
     }
 
-    private static class SemioticDeserializer implements JsonDeserializer<Semiotic> {
+    private static class SemioticConvereter implements JsonDeserializer<Semiotic> {
 
         @Override
         public Semiotic deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

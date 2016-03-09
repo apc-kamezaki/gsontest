@@ -4,12 +4,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class Duration {
-    private String timeslot;
+    private TimeSlot timeslot;
     private String start;
     private String end;
     private List<DayOfWeek> days;
 
-    public String getTimeslot() {
+    public TimeSlot getTimeslot() {
         return timeslot;
     }
 
@@ -55,5 +55,9 @@ public class Duration {
             }
             throw new IllegalArgumentException("unknown key for DayOfWeek : " + key);
         }
+    }
+
+    public enum TimeSlot {
+        ALLDAY, MORNING, LUNCH, DINNER, AFTERNOON, NIGHT
     }
 }

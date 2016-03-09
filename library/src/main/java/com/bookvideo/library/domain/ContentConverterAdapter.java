@@ -7,11 +7,11 @@ import java.lang.reflect.Type;
 public class ContentConverterAdapter implements DomainConverterAdapter {
     @Override
     public void apply(GsonBuilder gsonBuilder) {
-        gsonBuilder.registerTypeAdapter(Content.ContentType.class, new ContentTypeDeserializer());
-        gsonBuilder.registerTypeAdapter(Content.ContentItemType.class, new ContentItemTypeDeserializer());
+        gsonBuilder.registerTypeAdapter(Content.ContentType.class, new ContentTypeConverter());
+        gsonBuilder.registerTypeAdapter(Content.ContentItemType.class, new ContentItemTypeConverter());
     }
 
-    private static class ContentTypeDeserializer implements JsonDeserializer<Content.ContentType> {
+    private static class ContentTypeConverter implements JsonDeserializer<Content.ContentType> {
         @Override
         public Content.ContentType deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
                 throws JsonParseException {
@@ -23,7 +23,7 @@ public class ContentConverterAdapter implements DomainConverterAdapter {
         }
     }
 
-    private static class ContentItemTypeDeserializer implements JsonDeserializer<Content.ContentItemType> {
+    private static class ContentItemTypeConverter implements JsonDeserializer<Content.ContentItemType> {
         @Override
         public Content.ContentItemType deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
                 throws JsonParseException {

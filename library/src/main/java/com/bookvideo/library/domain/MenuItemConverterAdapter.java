@@ -7,11 +7,11 @@ import java.lang.reflect.Type;
 public class MenuItemConverterAdapter implements DomainConverterAdapter {
     @Override
     public void apply(GsonBuilder gsonBuilder) {
-        gsonBuilder.registerTypeAdapter(MenuItem.InfoType.class, new InfoTypeDeserializer());
+        gsonBuilder.registerTypeAdapter(MenuItem.InfoType.class, new InfoTypeConverter());
 
     }
 
-    private static class InfoTypeDeserializer implements JsonDeserializer<MenuItem.InfoType> {
+    private static class InfoTypeConverter implements JsonDeserializer<MenuItem.InfoType> {
 
         @Override
         public MenuItem.InfoType deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

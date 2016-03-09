@@ -39,7 +39,7 @@ public class DeviceConverterAdapter implements DomainConverterAdapter {
                 if (json.isJsonPrimitive()) {
                     if (json.getAsJsonPrimitive().isNumber()) {
                         return Device.LocationType.valueOf(json.getAsInt());
-                    } else if (json.getAsJsonPrimitive().isString()){
+                    } else if (json.getAsJsonPrimitive().isString()) {
                         return Device.LocationType.valueOf(Integer.valueOf(json.getAsString()));
                     }
                 }

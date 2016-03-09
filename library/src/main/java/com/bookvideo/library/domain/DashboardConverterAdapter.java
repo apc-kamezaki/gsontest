@@ -12,10 +12,10 @@ public class DashboardConverterAdapter implements DomainConverterAdapter {
 
     @Override
     public void apply(GsonBuilder gsonBuilder) {
-        gsonBuilder.registerTypeAdapter(Dashboard.Type.class, new DashboardTypeDeserializer());
+        gsonBuilder.registerTypeAdapter(Dashboard.Type.class, new DashboardTypeConverter());
     }
 
-    private static class DashboardTypeDeserializer implements JsonDeserializer<Dashboard.Type> {
+    private static class DashboardTypeConverter implements JsonDeserializer<Dashboard.Type> {
         @Override
         public Dashboard.Type deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
                 throws JsonParseException {

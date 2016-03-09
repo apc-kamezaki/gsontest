@@ -1,5 +1,5 @@
 {
-  "timeslot": "Timeslot string",
+  "timeslot": "allday",
   "start": "Start day",
   "end": "End day",
   "days": [
