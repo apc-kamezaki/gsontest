@@ -80,12 +80,22 @@ public class MenuItemTest {
         }
 
         assertThat(menuItem, is(notNullValue()));
-        assertThat(menuItem.getAlg(), hasSize(4));
+        assertThat(menuItem.getAlg(), hasSize(Allergen.values().length + 1));
         assertThat(menuItem.getAlg(),
-                contains(Allergen.NUTS,
+                contains(null,
+                        Allergen.NUTS,
                         Allergen.CELERY,
                         Allergen.MILK,
-                        Allergen.MUSTARD));
+                        Allergen.MUSTARD,
+                        Allergen.SO2,
+                        Allergen.OLIVEOIL,
+                        Allergen.EGGS,
+                        Allergen.SESAME,
+                        Allergen.FISH,
+                        Allergen.PEANUTS,
+                        Allergen.GLUTEN,
+                        Allergen.CRUSTACEANS,
+                        Allergen.SOYA));
 
     }
 
@@ -98,11 +108,14 @@ public class MenuItemTest {
         }
 
         assertThat(menuItem, is(notNullValue()));
-        assertThat(menuItem.getSemiotics(), hasSize(4));
+        assertThat(menuItem.getSemiotics(), hasSize(Semiotic.values().length + 1));
         assertThat(menuItem.getSemiotics(), contains(
                 Semiotic.HALAL,
                 Semiotic.KOSHER,
                 Semiotic.VEG,
+                Semiotic.VEGAN,
+                Semiotic.BIO,
+                Semiotic.FAVORIS,
                 null));
 
     }
