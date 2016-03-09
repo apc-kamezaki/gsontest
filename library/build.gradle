@@ -31,3 +31,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.google.code.gson:gson:2.6.2'
 }
+
+
+apply from: "$rootDir/gradle/android-check.gradle"
