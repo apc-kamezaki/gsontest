@@ -9,3 +9,11 @@ check {
     findbugs { skip true }
     pmd { skip true }
 }
+
+checkstyle {
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    // empty classpath
+    classpath = files()
+}

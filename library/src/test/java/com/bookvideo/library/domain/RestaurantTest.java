@@ -125,7 +125,10 @@ public class RestaurantTest {
         }
 
         assertThat(list, hasSize(3));
-        assertThat(list, contains(Restaurant.LogoStyleType.ICON, Restaurant.defaultLogoStyleType, Restaurant.LogoStyleType.WIDE));
+        assertThat(list, contains(
+                Restaurant.LogoStyleType.ICON,
+                Restaurant.defaultLogoStyleType,
+                Restaurant.LogoStyleType.WIDE));
 
     }
 }
