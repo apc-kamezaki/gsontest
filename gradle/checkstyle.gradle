@@ -3,8 +3,8 @@ apply plugin: 'com.noveogroup.android.check'
 check {
     checkstyle {
         config file("$rootDir/config/checkstyle/checkstyle.xml")
-        reportXML file("$project.buildDir/reports/checktyle-result.xml")
-        reportHTML file("$project.buildDir/reports/checktyle-result.html")
+        reportXML file("$project.buildDir/reports/checkstyle-result.xml")
+        reportHTML file("$project.buildDir/reports/checkstyle-result.html")
     }
     findbugs { skip true }
     pmd { skip true }
