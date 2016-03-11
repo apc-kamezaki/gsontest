@@ -11,8 +11,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DashboardTest {
     private Gson gson;
@@ -30,69 +29,72 @@ public class DashboardTest {
             dashboard = gson.fromJson(reader, Dashboard.class);
         }
 
-        assertThat(dashboard, is(notNullValue()));
-        assertThat(dashboard.getRestaurantId(), is("dashboard_id"));
-        assertThat(dashboard.getType(), is(Dashboard.Type.GRID));
+        assertThat(dashboard).isNotNull();
+        assertThat(dashboard.getRestaurantId()).isEqualTo("dashboard_id");
+        assertThat(dashboard.getType()).isEqualTo(Dashboard.Type.GRID);
 
-        assertThat(dashboard.getChildren(), is(notNullValue()));
-        assertThat(dashboard.getChildren().size(), is(2));
+        assertThat(dashboard.getChildren()).isNotNull().hasSize(2);
 
         // child 1
         {
             Dashboard.DashboardItem item = dashboard.getChildren().get(0);
 
-            assertThat(item.getOrder(), is(0));
-            assertThat(item.getIconId(), is(equalTo("icon-id-0")));
-            assertThat(item.getArrow(), is(10));
-            assertThat(item.getText(), is("text0"));
+            assertThat(item.getOrder()).isEqualTo(0);
+            assertThat(item.getIconId()).isEqualTo("icon-id-0");
+            assertThat(item.getArrow()).isEqualTo(10);
+            assertThat(item.getText()).isEqualTo("text0");
 
             // style
             Style style = item.getStyle();
-            assertThat(style, is(notNullValue()));
-            assertThat(style.getBackground().getColor(), is(0));
-            assertThat(style.getFont().getName(), is("font0"));
-            assertThat(style.getFont().getSize(), is(10));
+            assertThat(style).isNotNull();
+            assertThat(style.getBackground()).isNotNull();
+            assertThat(style.getBackground().getColor()).isEqualTo(0);
+            assertThat(style.getFont()).isNotNull();
+            assertThat(style.getFont().getName()).isEqualTo("font0");
+            assertThat(style.getFont().getSize()).isEqualTo(10);
 
             // duration
-            assertThat(item.getDurations(), hasSize(0));
+            assertThat(item.getDurations()).isNotNull().hasSize(0);
 
             // link
             Link link = item.getLink();
-            assertThat(link, is(notNullValue()));
-            assertThat(link.getType(), is(DocumentType.DASHBOARD));
-            assertThat(link.getTarget(), is("target0"));
-            assertThat(link.getData(), is("data0"));
+            assertThat(link).isNotNull();
+            assertThat(link.getType()).isEqualTo(DocumentType.DASHBOARD);
+            assertThat(link.getTarget()).isEqualTo("target0");
+            assertThat(link.getData()).isEqualTo("data0");
 
-            assertThat(style.getBackground().getType(), is(Style.defaultType));
-            assertThat(style.getLabel(), is(nullValue()));
-            assertThat(style.getFont().getAlign(), is(Style.defaultAlign));
+            assertThat(style.getBackground()).isNotNull();
+            assertThat(style.getBackground().getType()).isEqualTo(Style.defaultType);
+            assertThat(style.getLabel()).isNull();
+            assertThat(style.getFont()).isNotNull();
+            assertThat(style.getFont().getAlign()).isEqualTo(Style.defaultAlign);
         }
 
         // child 2
         {
             Dashboard.DashboardItem item = dashboard.getChildren().get(1);
 
-            assertThat(item.getOrder(), is(1));
-            assertThat(item.getIconId(), is(nullValue()));
-            assertThat(item.getArrow(), is(20));
-            assertThat(item.getText(), is("text1"));
+            assertThat(item.getOrder()).isEqualTo(1);
+            assertThat(item.getIconId()).isNull();
+            assertThat(item.getArrow()).isEqualTo(20);
+            assertThat(item.getText()).isEqualTo("text1");
 
             Style style = item.getStyle();
-            assertThat(style, is(notNullValue()));
-            assertThat(style.getBackground(), is(nullValue()));
-            assertThat(style.getLabel(), is(nullValue()));
-            assertThat(style.getPadding(), is(nullValue()));
-            assertThat(style.getFont(), is(nullValue()));
+            assertThat(style).isNotNull();
+            assertThat(style.getBackground()).isNull();
+            assertThat(style.getLabel()).isNull();
+            assertThat(style.getPadding()).isNull();
+            assertThat(style.getFont()).isNull();;
 
             // duration
-            assertThat(item.getDurations(), hasSize(1));
+            assertThat(item.getDurations()).isNotNull().hasSize(1);
 
             // link
             Link link = item.getLink();
-            assertThat(link, is(notNullValue()));
-            assertThat(link.getType(), is(DocumentType.CONTENT));
-            assertThat(link.getTarget(), is("target1"));
-            assertThat(link.getData(), is(nullValue()));
+            assertThat(link).isNotNull();
+            assertThat(link.getType()).isEqualTo(DocumentType.CONTENT);
+            assertThat(link.getTarget()).isEqualTo("target1");
+            assertThat(link.getData()).isNull();
         }
     }
 
@@ -105,13 +107,14 @@ public class DashboardTest {
             types = gson.fromJson(reader, listType);
         }
 
-        assertThat(types, is(notNullValue()));
-        assertThat(types, hasSize(5));
-        assertThat(types, contains(
-                Dashboard.Type.COL,
-                Dashboard.Type.GRID,
-                Dashboard.Type.BLOCK,
-                Dashboard.Type.LINE,
-                null));
+        assertThat(types)
+                .isNotNull()
+                .hasSize(5)
+                .contains(
+                        Dashboard.Type.COL,
+                        Dashboard.Type.GRID,
+                        Dashboard.Type.BLOCK,
+                        Dashboard.Type.LINE,
+                        null);
     }
 }

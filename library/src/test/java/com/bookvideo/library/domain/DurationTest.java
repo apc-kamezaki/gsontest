@@ -11,11 +11,8 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class DurationTest {
     private Gson gson;
@@ -33,12 +30,14 @@ public class DurationTest {
             duration = gson.fromJson(reader, Duration.class);
         }
 
-        assertThat(duration, is(notNullValue()));
-        assertThat(duration.getTimeslot(), is(Duration.TimeSlot.ALLDAY));
-        assertThat(duration.getStart(), is("Start day"));
-        assertThat(duration.getEnd(), is("End day"));
-        assertThat(duration.getDays(), hasSize(2));
-        assertThat(duration.getDays(), contains(Duration.DayOfWeek.MON, Duration.DayOfWeek.FRI));
+        assertThat(duration).isNotNull();
+        assertThat(duration.getTimeslot()).isEqualTo(Duration.TimeSlot.ALLDAY);
+        assertThat(duration.getStart()).isEqualTo("Start day");
+        assertThat(duration.getEnd()).isEqualTo("End day");
+        assertThat(duration.getDays())
+                .isNotNull()
+                .hasSize(2)
+                .contains(Duration.DayOfWeek.MON, Duration.DayOfWeek.FRI);
     }
 
     @Test
@@ -50,15 +49,17 @@ public class DurationTest {
             timeSlotList = gson.fromJson(reader, listType);
         }
 
-        assertThat(timeSlotList, hasSize(7));
-        assertThat(timeSlotList, contains(
-                null,
-                Duration.TimeSlot.ALLDAY,
-                Duration.TimeSlot.MORNING,
-                Duration.TimeSlot.LUNCH,
-                Duration.TimeSlot.DINNER,
-                Duration.TimeSlot.AFTERNOON,
-                Duration.TimeSlot.NIGHT));
+        assertThat(timeSlotList)
+                .isNotNull()
+                .hasSize(7)
+                .contains(
+                        null,
+                        Duration.TimeSlot.ALLDAY,
+                        Duration.TimeSlot.MORNING,
+                        Duration.TimeSlot.LUNCH,
+                        Duration.TimeSlot.DINNER,
+                        Duration.TimeSlot.AFTERNOON,
+                        Duration.TimeSlot.NIGHT);
     }
 
     @Test
@@ -69,17 +70,18 @@ public class DurationTest {
             duration = gson.fromJson(reader, Duration.class);
         }
 
-        assertThat(duration, is(notNullValue()));
-        assertThat(duration.getDays(), hasSize(7));
-        assertThat(duration.getDays(),
-                contains(Duration.DayOfWeek.SUN,
+        assertThat(duration).isNotNull();
+        assertThat(duration.getDays())
+                .isNotNull()
+                .hasSize(7)
+                .contains(
+                        Duration.DayOfWeek.SUN,
                         Duration.DayOfWeek.MON,
                         Duration.DayOfWeek.TUE,
                         Duration.DayOfWeek.WED,
                         Duration.DayOfWeek.THU,
                         Duration.DayOfWeek.FRI,
-                        Duration.DayOfWeek.SAT));
-
+                        Duration.DayOfWeek.SAT);
     }
 
     @Test
@@ -87,8 +89,10 @@ public class DurationTest {
         String illegalString = "{ \"days\": [ \"mo\", \"xxx\", \"su\"]}";
 
         Duration duration = gson.fromJson(illegalString, Duration.class);
-        assertThat(duration, is(notNullValue()));
-        assertThat(duration.getDays(), hasSize(3));
-        assertThat(duration.getDays(), contains(Duration.DayOfWeek.MON, null, Duration.DayOfWeek.SUN));
+        assertThat(duration).isNotNull();
+        assertThat(duration.getDays())
+                .isNotNull()
+                .hasSize(3)
+                .contains(Duration.DayOfWeek.MON, null, Duration.DayOfWeek.SUN);
     }
 }

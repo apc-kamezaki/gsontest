@@ -8,9 +8,8 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class TranslationTest {
     private Gson gson;
@@ -28,25 +27,26 @@ public class TranslationTest {
             translation = gson.fromJson(reader, Translation.class);
         }
 
-        assertThat(translation, is(notNullValue()));
-        assertThat(translation.getRestaurantId(), is("translation_restaurant"));
-        assertThat(translation.getLocale(), is("en"));
-        assertThat(translation.getType(), is(DocumentType.DASHBOARD));
-        assertThat(translation.getTranslation(), is(notNullValue()));
-        assertThat(translation.getTranslation().size(), is(2));
+        assertThat(translation).isNotNull();
+        assertThat(translation.getRestaurantId()).isEqualTo("translation_restaurant");
+        assertThat(translation.getLocale()).isEqualTo("en");
+        assertThat(translation.getType()).isEqualTo(DocumentType.DASHBOARD);
+        assertThat(translation.getTranslation())
+                .isNotNull()
+                .hasSize(2);
 
         // translation 1
         {
             Translation.TranslationItem item = translation.getTranslation().get(0);
-            assertThat(item.getKey(), is("key_1"));
-            assertThat(item.getValue(), is("value_1"));
+            assertThat(item.getKey()).isEqualTo("key_1");
+            assertThat(item.getValue()).isEqualTo("value_1");
         }
 
         // translation 2
         {
             Translation.TranslationItem item = translation.getTranslation().get(1);
-            assertThat(item.getKey(), is("key_2"));
-            assertThat(item.getValue(), is("value_2"));
+            assertThat(item.getKey()).isEqualTo("key_2");
+            assertThat(item.getValue()).isEqualTo("value_2");
         }
     }
 
