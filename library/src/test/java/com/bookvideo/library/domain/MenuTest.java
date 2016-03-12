@@ -8,12 +8,7 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MenuTest {
     private Gson gson;
@@ -31,34 +26,35 @@ public class MenuTest {
             menu = gson.fromJson(reader, Menu.class);
         }
 
-        assertThat(menu, is(notNullValue()));
-        assertThat(menu.getRestaurantId(), is("menu_id"));
+        assertThat(menu).isNotNull();
+        assertThat(menu.getRestaurantId()).isEqualTo("menu_id");
         {
             // style
             Style style = menu.getStyle();
-            assertThat(style, is(notNullValue()));
-            assertThat(style.getLabel().getBackgroundColor(), is(2));
-            assertThat(style.getLabel().getColor(), is(3));
-            assertThat(style.getLabel().getAlign(), is(Style.Align.CENTER));
-            assertThat(style.getLabel().getStyle(), is(Style.LabelStyle.HEIGHT));
+            assertThat(style).isNotNull();
+            assertThat(style.getLabel()).isNotNull();
+            assertThat(style.getLabel().getBackgroundColor()).isEqualTo(2);
+            assertThat(style.getLabel().getColor()).isEqualTo(3);
+            assertThat(style.getLabel().getAlign()).isEqualTo(Style.Align.CENTER);
+            assertThat(style.getLabel().getStyle()).isEqualTo(Style.LabelStyle.HEIGHT);
         }
-        assertThat(menu.getPages().size(), is(2));
+        assertThat(menu.getPages()).isNotNull().hasSize(2);
         {
             // page1
             Menu.Page page = menu.getPages().get(0);
-            assertThat(page.getTitle(), is("page1"));
-            assertThat(page.getOrder(), is(10));
+            assertThat(page.getTitle()).isEqualTo("page1");
+            assertThat(page.getOrder()).isEqualTo(10);
             // duration
-            assertThat(page.getDurations(), hasSize(2));
+            assertThat(page.getDurations()).isNotNull().hasSize(2);
             {
                 // categories
-                assertThat(page.getCategories().size(), is(1));
+                assertThat(page.getCategories()).isNotNull().hasSize(1);
                 {
                     // item 1
                     Menu.Item categoryItem = page.getCategories().get(0);
-                    assertThat(categoryItem, is(notNullValue()));
-                    assertThat(categoryItem.getCategoryId(), is("category 1-1"));
-                    assertThat(categoryItem.getOrder(), is(1));
+                    assertThat(categoryItem).isNotNull();
+                    assertThat(categoryItem.getCategoryId()).isEqualTo("category 1-1");
+                    assertThat(categoryItem.getOrder()).isEqualTo(1);
 
                 }
             }
@@ -66,25 +62,25 @@ public class MenuTest {
         {
             // page 2
             Menu.Page page = menu.getPages().get(1);
-            assertThat(page.getTitle(), is("page2"));
-            assertThat(page.getOrder(), is(20));
+            assertThat(page.getTitle()).isEqualTo("page2");
+            assertThat(page.getOrder()).isEqualTo(20);
             // duration
-            assertThat(page.getDurations(), hasSize(0));
+            assertThat(page.getDurations()).isNotNull().hasSize(0);
             {
                 // categories
-                assertThat(page.getCategories().size(), is(2));
+                assertThat(page.getCategories()).isNotNull().hasSize(2);
 
                 {
                     // item 1
                     Menu.Item categoryItem = page.getCategories().get(0);
-                    assertThat(categoryItem.getCategoryId(), is("category 2-1"));
-                    assertThat(categoryItem.getOrder(), is(2));
+                    assertThat(categoryItem.getCategoryId()).isEqualTo("category 2-1");
+                    assertThat(categoryItem.getOrder()).isEqualTo(2);
                 }
                 {
                     // item 2
                     Menu.Item categoryItem = page.getCategories().get(1);
-                    assertThat(categoryItem.getCategoryId(), is("category 2-2"));
-                    assertThat(categoryItem.getOrder(), is(3));
+                    assertThat(categoryItem.getCategoryId()).isEqualTo("category 2-2");
+                    assertThat(categoryItem.getOrder()).isEqualTo(3);
                 }
             }
         }

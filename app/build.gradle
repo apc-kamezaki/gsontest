@@ -1,5 +1,12 @@
 apply plugin: 'com.android.application'
 
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.noveogroup.android:check:+'
+    }
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -30,3 +37,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.0'
 }
+
+apply from: "$rootDir/gradle/checkstyle.gradle"

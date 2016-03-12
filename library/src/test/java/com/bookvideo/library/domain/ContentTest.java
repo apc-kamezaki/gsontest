@@ -11,8 +11,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ContentTest {
     private Gson gson;
@@ -30,70 +29,82 @@ public class ContentTest {
             content = gson.fromJson(reader, Content.class);
         }
 
-        assertThat(content, is(notNullValue()));
-        assertThat(content.getRestaurantId(), is("content_restaurant_id"));
-        assertThat(content.getType(), is(Content.ContentType.CONTENT));
+        assertThat(content).isNotNull();
+        assertThat(content.getRestaurantId()).isEqualTo("content_restaurant_id");
+        assertThat(content.getType()).isEqualTo(Content.ContentType.CONTENT);
         {
             Style style = content.getStyle();
-            assertThat(style, is(notNullValue()));
-            assertThat(style.getBackground().getType(), is(Style.Type.WIDE));
-            assertThat(style.getPadding().getHorizontalPadding(), is(10));
+            assertThat(style).isNotNull();
+            assertThat(style.getBackground()).isNotNull();
+            assertThat(style.getBackground().getType()).isEqualTo(Style.Type.WIDE);
+            assertThat(style.getPadding()).isNotNull();
+            assertThat(style.getPadding().getHorizontalPadding()).isEqualTo(10);
         }
-        assertThat(content.getPages().size(), is(2));
+        assertThat(content.getPages()).isNotNull().hasSize(2);
 
         {
             // page 1
             Content.ContentPage page = content.getPages().get(0);
-            assertThat(page.getTitle(), is("page1"));
-            assertThat(page.getOrder(), is(10));
-            assertThat(page.getDurations(), hasSize(2));
-            assertThat(page.getChildren().size(), is(1));
+            assertThat(page.getTitle()).isEqualTo("page1");
+            assertThat(page.getOrder()).isEqualTo(10);
+            assertThat(page.getDurations()).isNotNull().hasSize(2);
+            assertThat(page.getChildren()).isNotNull().hasSize(1);
 
             {
                 // child 1
 
                 Content.ContentItem item = page.getChildren().get(0);
-                assertThat(item.getType(), is(Content.ContentItemType.TEXT));
-                assertThat(item.getOrder(), is(100));
-                assertThat(item.getText(), is("item 1-1"));
-                assertThat(item.getStyle(), is(notNullValue()));
-                assertThat(item.getStyle().getFont().getName(), is("font_name"));
-                assertThat(item.getStyle().getFont().getAlign(), is(Style.Align.RIGHT));
-                assertThat(item.getLink(), is(notNullValue()));
-                assertThat(item.getLink().getType(), is(DocumentType.CONTENT));
-                assertThat(item.getLink().getData(), is("data1"));
+                assertThat(item.getType()).isEqualTo(Content.ContentItemType.TEXT);
+                assertThat(item.getOrder()).isEqualTo(100);
+                assertThat(item.getText()).isEqualTo("item 1-1");
+                assertThat(item.getStyle()).isNotNull();
+                assertThat(item.getStyle().getFont()).isNotNull();
+                assertThat(item.getStyle().getFont().getName()).isEqualTo("font_name");
+                assertThat(item.getStyle().getFont().getAlign())
+                        .isNotNull()
+                        .isEqualTo(Style.Align.RIGHT);
+                assertThat(item.getLink()).isNotNull();
+                assertThat(item.getLink().getType()).isEqualTo(DocumentType.CONTENT);
+                assertThat(item.getLink().getData()).isEqualTo("data1");
             }
         }
 
         {
             // page2
             Content.ContentPage page = content.getPages().get(1);
-            assertThat(page.getTitle(), is("page2"));
-            assertThat(page.getDurations(), hasSize(0));
-            assertThat(page.getOrder(), is(20));
+            assertThat(page.getTitle()).isEqualTo("page2");
+            assertThat(page.getDurations()).isNotNull().hasSize(0);
+            assertThat(page.getOrder()).isEqualTo(20);
 
             {
                 // child 1
                 Content.ContentItem item = page.getChildren().get(0);
-                assertThat(item.getType(), is(Content.ContentItemType.IMAGE));
-                assertThat(item.getOrder(), is(200));
-                assertThat(item.getText(), is("item 2-1"));
-                assertThat(item.getStyle(), is(notNullValue()));
-                assertThat(item.getStyle().getBackground().getImageId(), is("bg_id"));
-                assertThat(item.getStyle().getBackground().getType(), is(Style.Type.CROP));
-                assertThat(item.getLink(), is(notNullValue()));
-                assertThat(item.getLink().getType(), is(DocumentType.MENU));
-                assertThat(item.getLink().getTarget(), is("target2-1"));
+                assertThat(item.getType()).isEqualTo(Content.ContentItemType.IMAGE);
+                assertThat(item.getOrder()).isEqualTo(200);
+                assertThat(item.getText()).isEqualTo("item 2-1");
+                assertThat(item.getStyle()).isNotNull();
+                assertThat(item.getStyle().getBackground()).isNotNull();
+                assertThat(item.getStyle().getBackground().getImageId())
+                        .isNotNull()
+                        .isEqualTo("bg_id");
+                assertThat(item.getStyle().getBackground().getType())
+                        .isNotNull()
+                        .isEqualTo(Style.Type.CROP);
+                assertThat(item.getLink()).isNotNull();
+                assertThat(item.getLink().getType()).isEqualTo(DocumentType.MENU);
+                assertThat(item.getLink().getTarget()).isEqualTo("target2-1");
             }
 
             {
                 // child 2
                 Content.ContentItem item = page.getChildren().get(1);
-                assertThat(item.getType(), is(Content.ContentItemType.CONTACT));
-                assertThat(item.getOrder(), is(210));
-                assertThat(item.getText(), is("item 2-2"));
-                assertThat(item.getStyle().getFont().getName(), is("font_name"));
-                assertThat(item.getLink().getType(), is(DocumentType.DASHBOARD));
+                assertThat(item.getType()).isEqualTo(Content.ContentItemType.CONTACT);
+                assertThat(item.getOrder()).isEqualTo(210);
+                assertThat(item.getText()).isEqualTo("item 2-2");
+                assertThat(item.getStyle()).isNotNull();
+                assertThat(item.getStyle().getFont()).isNotNull();
+                assertThat(item.getStyle().getFont().getName()).isEqualTo("font_name");
+                assertThat(item.getLink().getType()).isEqualTo(DocumentType.DASHBOARD);
             }
         }
     }
@@ -107,14 +118,14 @@ public class ContentTest {
             contentTypes = gson.fromJson(reader, listType);
         }
 
-        assertThat(contentTypes, is(notNullValue()));
-        assertThat(contentTypes, hasSize(4));
-        assertThat(contentTypes, contains(
-                Content.ContentType.CONTENT,
-                Content.ContentType.AGENDA,
-                Content.ContentType.GALLERY,
-                null));
-
+        assertThat(contentTypes)
+                .isNotNull()
+                .hasSize(4)
+                .contains(
+                        Content.ContentType.CONTENT,
+                        Content.ContentType.AGENDA,
+                        Content.ContentType.GALLERY,
+                        null);
     }
 
     @Test
@@ -126,17 +137,17 @@ public class ContentTest {
             itemTypes = gson.fromJson(reader, listType);
         }
 
-        assertThat(itemTypes, is(notNullValue()));
-        assertThat(itemTypes, hasSize(9));
-        assertThat(itemTypes, contains(null,
-                Content.ContentItemType.LINE,
-                Content.ContentItemType.TEXT,
-                Content.ContentItemType.TITLE,
-                Content.ContentItemType.IMAGE,
-                Content.ContentItemType.SPACE,
-                Content.ContentItemType.MAP,
-                Content.ContentItemType.CONTACT,
-                Content.ContentItemType.SERVICE));
-
+        assertThat(itemTypes)
+                .isNotNull()
+                .hasSize(9)
+                .contains(null,
+                        Content.ContentItemType.LINE,
+                        Content.ContentItemType.TEXT,
+                        Content.ContentItemType.TITLE,
+                        Content.ContentItemType.IMAGE,
+                        Content.ContentItemType.SPACE,
+                        Content.ContentItemType.MAP,
+                        Content.ContentItemType.CONTACT,
+                        Content.ContentItemType.SERVICE);
     }
 }

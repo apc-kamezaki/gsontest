@@ -11,8 +11,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class MediaTest {
@@ -32,23 +31,22 @@ public class MediaTest {
             mediaList = gson.fromJson(reader, listType);
         }
 
-        assertThat(mediaList, is(notNullValue()));
-        assertThat(mediaList, hasSize(3));
+        assertThat(mediaList).isNotNull().hasSize(3);
 
         // media 1
         {
             Media media = mediaList.get(0);
-            assertThat(media.getRestaurantId(), is("restId1"));
-            assertThat(media.getType(), is("type1"));
-            assertThat(media.getName(), is("name1"));
+            assertThat(media.getRestaurantId()).isEqualTo("restId1");
+            assertThat(media.getType()).isEqualTo("type1");
+            assertThat(media.getName()).isEqualTo("name1");
         }
 
         // media 3
         {
             Media media = mediaList.get(2);
-            assertThat(media.getRestaurantId(), is("restId3"));
-            assertThat(media.getType(), is("type3"));
-            assertThat(media.getName(), is("name3"));
+            assertThat(media.getRestaurantId()).isEqualTo("restId3");
+            assertThat(media.getType()).isEqualTo("type3");
+            assertThat(media.getName()).isEqualTo("name3");
         }
     }
 
@@ -61,14 +59,15 @@ public class MediaTest {
             sizeList = gson.fromJson(reader, listType);
         }
 
-        assertThat(sizeList, is(notNullValue()));
-        assertThat(sizeList, hasSize(6));
-        assertThat(sizeList, contains(
-                ImageSize.NONE,
-                ImageSize.QUARTER,
-                ImageSize.THIRD,
-                ImageSize.HALF,
-                ImageSize.FULL,
-                ImageSize.NONE));
+        assertThat(sizeList)
+                .isNotNull()
+                .hasSize(6)
+                .contains(
+                        ImageSize.NONE,
+                        ImageSize.QUARTER,
+                        ImageSize.THIRD,
+                        ImageSize.HALF,
+                        ImageSize.FULL,
+                        ImageSize.NONE);
     }
 }

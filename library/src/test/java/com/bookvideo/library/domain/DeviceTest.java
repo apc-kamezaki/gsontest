@@ -15,11 +15,7 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DeviceTest {
     private Gson gson;
@@ -37,22 +33,24 @@ public class DeviceTest {
             device = gson.fromJson(reader, Device.class);
         }
 
-        assertThat(device, is(notNullValue()));
-        assertThat(device.getLocations(), hasSize(2));
-        assertThat(device.getLastRestaurant(), is("last restaurant"));
-        assertThat(device.getStatus(), is(Device.DeviceStatus.ONLINE));
-        assertThat(device.getBattery(), is(notNullValue()));
-        assertThat(device.getBattery().getLevel(), is(20));
-        assertThat(device.getAppStatusList(), hasSize(2));
-        assertThat(device.getUpdaterStatusList(), hasSize(1));
-        assertThat(device.getDataStatusList(), hasSize(3));
+        assertThat(device).isNotNull();
+        assertThat(device.getLocations()).isNotNull().hasSize(2);
+        assertThat(device.getLastRestaurant()).isEqualTo("last restaurant");
+        assertThat(device.getStatus()).isEqualTo(Device.DeviceStatus.ONLINE);
+        assertThat(device.getBattery()).isNotNull();
+        assertThat(device.getBattery().getLevel()).isEqualTo(20);
+        assertThat(device.getAppStatusList()).isNotNull().hasSize(2);
+        assertThat(device.getUpdaterStatusList()).isNotNull().hasSize(1);
+        assertThat(device.getDataStatusList()).isNotNull().hasSize(3);
     }
 
     @Test
     public void shouldSerializeJson() throws Exception {
         Device device = new Device();
-        device.addToLocations(new Device.Location(Device.LocationType.RESTAURANT, 1, "new location 1"));
-        device.addToLocations(new Device.Location(Device.LocationType.OFFICE, 2, "new location 2"));
+        device.addToLocations(
+                new Device.Location(Device.LocationType.RESTAURANT, 1, "new location 1"));
+        device.addToLocations(
+                new Device.Location(Device.LocationType.OFFICE, 2, "new location 2"));
         device.setLastRestaurant("last restaurant");
         device.setStatus(Device.DeviceStatus.OFFLINE);
         Device.Battery battery = new Device.Battery();
@@ -73,27 +71,32 @@ public class DeviceTest {
 
         String jsonString = gson.toJson(device, Device.class);
         JsonElement element = gson.fromJson(jsonString, JsonElement.class);
-        assertThat(element.isJsonObject(), is(true));
+        assertThat(element.isJsonObject()).isTrue();
         JsonObject deviceJson = element.getAsJsonObject();
-        assertThat(deviceJson.has("locations"), is(true));
-        assertThat(deviceJson.get("locations").isJsonArray(), is(true));
+        assertThat(deviceJson.has("locations")).isTrue();
+        assertThat(deviceJson.get("locations").isJsonArray()).isTrue();
         JsonArray locationsArray = deviceJson.getAsJsonArray("locations");
-        assertThat(locationsArray.size(), is(device.getLocations().size()));
-        assertThat(deviceJson.has("lastResto"), is(true));
-        assertThat(deviceJson.get("lastResto").getAsString(), is(device.getLastRestaurant()));
-        assertThat(deviceJson.has("status"), is(true));
-        assertThat(deviceJson.get("status").getAsString(), is(device.getStatus().name().toLowerCase()));
-        assertThat(deviceJson.has("battery"), is(true));
-        assertThat(deviceJson.get("battery").isJsonObject(), is(true));
-        assertThat(deviceJson.has("bvUpdate"), is(true));
-        assertThat(deviceJson.get("bvUpdate").isJsonArray(), is(true));
-        assertThat(deviceJson.getAsJsonArray("bvUpdate").size(), is(device.getAppStatusList().size()));
-        assertThat(deviceJson.has("updater"), is(true));
-        assertThat(deviceJson.get("updater").isJsonArray(), is(true));
-        assertThat(deviceJson.getAsJsonArray("updater").size(), is(device.getUpdaterStatusList().size()));
-        assertThat(deviceJson.has("bvData"), is(true));
-        assertThat(deviceJson.get("bvData").isJsonArray(), is(true));
-        assertThat(deviceJson.getAsJsonArray("bvData").size(), is(device.getDataStatusList().size()));
+        assertThat(locationsArray.size()).isEqualTo(device.getLocations().size());
+        assertThat(deviceJson.has("lastResto")).isTrue();
+        assertThat(deviceJson.get("lastResto").getAsString())
+                .isEqualTo(device.getLastRestaurant());
+        assertThat(deviceJson.has("status")).isTrue();
+        assertThat(deviceJson.get("status").getAsString())
+                .isEqualTo(device.getStatus().name().toLowerCase());
+        assertThat(deviceJson.has("battery")).isTrue();
+        assertThat(deviceJson.get("battery").isJsonObject()).isTrue();
+        assertThat(deviceJson.has("bvUpdate")).isTrue();
+        assertThat(deviceJson.get("bvUpdate").isJsonArray()).isTrue();
+        assertThat(deviceJson.getAsJsonArray("bvUpdate").size())
+                .isEqualTo(device.getAppStatusList().size());
+        assertThat(deviceJson.has("updater")).isTrue();
+        assertThat(deviceJson.get("updater").isJsonArray()).isTrue();
+        assertThat(deviceJson.getAsJsonArray("updater").size())
+                .isEqualTo(device.getUpdaterStatusList().size());
+        assertThat(deviceJson.has("bvData")).isTrue();
+        assertThat(deviceJson.get("bvData").isJsonArray()).isTrue();
+        assertThat(deviceJson.getAsJsonArray("bvData").size())
+                .isEqualTo(device.getDataStatusList().size());
 
     }
 
@@ -105,27 +108,29 @@ public class DeviceTest {
             location = gson.fromJson(reader, Device.Location.class);
         }
 
-        assertThat(location, is(notNullValue()));
-        assertThat(location.getType(), is(Device.LocationType.OFFICE));
-        assertThat(location.getSettedAt(), is(100));
-        assertThat(location.getLocation(), is("location text"));
+        assertThat(location).isNotNull();
+        assertThat(location.getType()).isEqualTo(Device.LocationType.OFFICE);
+        assertThat(location.getSettedAt()).isEqualTo(100);
+        assertThat(location.getLocation()).isEqualTo("location text");
     }
 
     @Test
     public void shouldSerializeLocation() throws Exception {
-        Device.Location location = new Device.Location(Device.LocationType.RESTAURANT, 200, "MONACO");
+        Device.Location location =
+                new Device.Location(Device.LocationType.RESTAURANT, 200, "MONACO");
 
         String jsonString = gson.toJson(location, Device.Location.class);
 
         JsonElement element = gson.fromJson(jsonString, JsonElement.class);
-        assertThat(element.isJsonObject(), is(true));
+        assertThat(element.isJsonObject()).isTrue();
         JsonObject locationJson = element.getAsJsonObject();
-        assertThat(locationJson.has("type"), is(true));
-        assertThat(locationJson.get("type").getAsInt(), is(location.getType().getLocationValue()));
-        assertThat(locationJson.has("settedAt"), is(true));
-        assertThat(locationJson.get("settedAt").getAsInt(), is(location.getSettedAt()));
-        assertThat(locationJson.has("location"), is(true));
-        assertThat(locationJson.get("location").getAsString(), is(location.getLocation()));
+        assertThat(locationJson.has("type")).isTrue();
+        assertThat(locationJson.get("type").getAsInt())
+                .isEqualTo(location.getType().getLocationValue());
+        assertThat(locationJson.has("settedAt")).isTrue();
+        assertThat(locationJson.get("settedAt").getAsInt()).isEqualTo(location.getSettedAt());
+        assertThat(locationJson.has("location")).isTrue();
+        assertThat(locationJson.get("location").getAsString()).isEqualTo(location.getLocation());
     }
 
     @Test
@@ -136,13 +141,13 @@ public class DeviceTest {
             battery = gson.fromJson(reader, Device.Battery.class);
         }
 
-        assertThat(battery, is(notNullValue()));
-        assertThat(battery.getLevel(), is(50));
-        assertThat(battery.getStatus(), is(Device.BatteryStatus.CHARGING));
-        assertThat(battery.getCharge(), is(notNullValue()));
-        assertThat(battery.getCharge().getPluggedTimes().size(), is(1));
-        assertThat(battery.getCharge().getDispluggedTimes().size(), is(1));
-        assertThat(battery.getHealth(), is(Device.BatteryHealth.OVERHEAT));
+        assertThat(battery).isNotNull();;
+        assertThat(battery.getLevel()).isEqualTo(50);
+        assertThat(battery.getStatus()).isEqualTo(Device.BatteryStatus.CHARGING);
+        assertThat(battery.getCharge()).isNotNull();
+        assertThat(battery.getCharge().getPluggedTimes()).isNotNull().hasSize(1);
+        assertThat(battery.getCharge().getDispluggedTimes()).isNotNull().hasSize(1);
+        assertThat(battery.getHealth()).isEqualTo(Device.BatteryHealth.OVERHEAT);
     }
 
     @Test
@@ -159,22 +164,24 @@ public class DeviceTest {
 
         String jsonString = gson.toJson(battery, Device.Battery.class);
         JsonElement element = gson.fromJson(jsonString, JsonElement.class);
-        assertThat(element, is(notNullValue()));
-        assertThat(element.isJsonObject(), is(true));
+        assertThat(element).isNotNull();
+        assertThat(element.isJsonObject()).isTrue();
         JsonObject batteryJson = element.getAsJsonObject();
-        assertThat(batteryJson.has("level"), is(true));
-        assertThat(batteryJson.get("level").getAsInt(), is(battery.getLevel()));
-        assertThat(batteryJson.has("status"), is(true));
-        assertThat(batteryJson.get("status").getAsString(), is(battery.getStatus().name().toLowerCase()));
-        assertThat(batteryJson.has("charge"), is(true));
-        assertThat(batteryJson.get("charge").isJsonObject(), is(true));
+        assertThat(batteryJson.has("level")).isTrue();
+        assertThat(batteryJson.get("level").getAsInt()).isEqualTo(battery.getLevel());
+        assertThat(batteryJson.has("status")).isTrue();
+        assertThat(batteryJson.get("status").getAsString())
+                .isEqualTo(battery.getStatus().name().toLowerCase());
+        assertThat(batteryJson.has("charge")).isTrue();
+        assertThat(batteryJson.get("charge").isJsonObject()).isTrue();
         JsonObject chargeJson = batteryJson.get("charge").getAsJsonObject();
-        assertThat(chargeJson.has("pluggedTime"), is(true));
-        assertThat(chargeJson.get("pluggedTime").isJsonArray(), is(true));
-        assertThat(chargeJson.has("displuggedTime"), is(true));
-        assertThat(chargeJson.get("displuggedTime").isJsonArray(), is(true));
-        assertThat(batteryJson.has("health"), is(true));
-        assertThat(batteryJson.get("health").getAsString(), is(battery.getHealth().name().toLowerCase()));
+        assertThat(chargeJson.has("pluggedTime")).isTrue();
+        assertThat(chargeJson.get("pluggedTime").isJsonArray()).isTrue();
+        assertThat(chargeJson.has("displuggedTime")).isTrue();
+        assertThat(chargeJson.get("displuggedTime").isJsonArray()).isTrue();
+        assertThat(batteryJson.has("health")).isTrue();
+        assertThat(batteryJson.get("health").getAsString())
+                .isEqualTo(battery.getHealth().name().toLowerCase());
     }
 
     @Test
@@ -186,21 +193,20 @@ public class DeviceTest {
             statusList = gson.fromJson(reader, listType);
         }
 
-        assertThat(statusList, is(notNullValue()));
-        assertThat(statusList, hasSize(2));
+        assertThat(statusList).isNotNull().hasSize(2);
         {
             // status 1
             Device.ApplicationStatus status = statusList.get(0);
-            assertThat(status.getInstalledTime(), is(10));
-            assertThat(status.getVersion(), is(11));
-            assertThat(status.getOpenedTime(), is(12));
+            assertThat(status.getInstalledTime()).isEqualTo(10);
+            assertThat(status.getVersion()).isEqualTo(11);
+            assertThat(status.getOpenedTime()).isEqualTo(12);
         }
         {
             // status 2
             Device.ApplicationStatus status = statusList.get(1);
-            assertThat(status.getInstalledTime(), is(20));
-            assertThat(status.getVersion(), is(21));
-            assertThat(status.getOpenedTime(), is(0));
+            assertThat(status.getInstalledTime()).isEqualTo(20);
+            assertThat(status.getVersion()).isEqualTo(21);
+            assertThat(status.getOpenedTime()).isEqualTo(0);
         }
 
     }
@@ -213,31 +219,31 @@ public class DeviceTest {
         String jsonString = gson.toJson(statusList, listType);
 
         JsonElement element = gson.fromJson(jsonString, JsonElement.class);
-        assertThat(element.isJsonArray(), is(true));
+        assertThat(element.isJsonArray()).isTrue();
         JsonArray array = element.getAsJsonArray();
-        assertThat(array.size(), is(2));
+        assertThat(array.size()).isEqualTo(2);
         {
             // status 1
             JsonElement item = array.get(0);
-            assertThat(item.isJsonObject(), is(true));
+            assertThat(item.isJsonObject()).isTrue();
             JsonObject object = item.getAsJsonObject();
-            assertThat(object.has("installedTime"), is(true));
-            assertThat(object.get("installedTime").getAsInt(), is(10));
-            assertThat(object.has("version"), is(true));
-            assertThat(object.get("version").getAsInt(), is(11));
-            assertThat(object.has("openedTime"), is(true));
-            assertThat(object.get("openedTime").getAsInt(), is(12));
+            assertThat(object.has("installedTime")).isTrue();
+            assertThat(object.get("installedTime").getAsInt()).isEqualTo(10);
+            assertThat(object.has("version")).isTrue();
+            assertThat(object.get("version").getAsInt()).isEqualTo(11);
+            assertThat(object.has("openedTime")).isTrue();
+            assertThat(object.get("openedTime").getAsInt()).isEqualTo(12);
         }
         {
             // status 2
             JsonElement item = array.get(1);
-            assertThat(item.isJsonObject(), is(true));
+            assertThat(item.isJsonObject()).isTrue();
             JsonObject object = item.getAsJsonObject();
-            assertThat(object.has("installedTime"), is(true));
-            assertThat(object.get("installedTime").getAsInt(), is(20));
-            assertThat(object.has("version"), is(true));
-            assertThat(object.get("version").getAsInt(), is(21));
-            assertThat(object.has("openedTime"), is(false));
+            assertThat(object.has("installedTime")).isTrue();
+            assertThat(object.get("installedTime").getAsInt()).isEqualTo(20);
+            assertThat(object.has("version")).isTrue();
+            assertThat(object.get("version").getAsInt()).isEqualTo(21);
+            assertThat(object.has("openedTime")).isFalse();
 
         }
     }
@@ -251,17 +257,18 @@ public class DeviceTest {
             locationTypeList = gson.fromJson(reader, listType);
         }
 
-        assertThat(locationTypeList, is(notNullValue()));
-        assertThat(locationTypeList, hasSize(8));
-        assertThat(locationTypeList, contains(
-                Device.LocationType.RESTAURANT,
-                Device.LocationType.OFFICE,
-                null,
-                Device.LocationType.RESTAURANT,
-                Device.LocationType.OFFICE,
-                null,
-                null,
-                null));
+        assertThat(locationTypeList)
+                .isNotNull()
+                .hasSize(8)
+                .contains(
+                        Device.LocationType.RESTAURANT,
+                        Device.LocationType.OFFICE,
+                        null,
+                        Device.LocationType.RESTAURANT,
+                        Device.LocationType.OFFICE,
+                        null,
+                        null,
+                        null);
     }
 
     @Test
@@ -272,14 +279,14 @@ public class DeviceTest {
         String jsonString = gson.toJson(locationTypeList, listType);
 
         JsonElement element = gson.fromJson(jsonString, JsonElement.class);
-        assertThat(element.isJsonArray(), is(true));
+        assertThat(element.isJsonArray()).isTrue();
         JsonArray array = element.getAsJsonArray();
-        assertThat(array.size(), is(2));
+        assertThat(array.size()).isEqualTo(2);
         for (int i = 0; i < array.size(); i++) {
             JsonElement item = array.get(i);
-            assertThat(item.isJsonPrimitive(), is(true));
-            assertThat(item.getAsJsonPrimitive().isNumber(), is(true));
-            assertThat(item.getAsInt(), is(locationTypeList.get(i).getLocationValue()));
+            assertThat(item.isJsonPrimitive()).isTrue();
+            assertThat(item.getAsJsonPrimitive().isNumber()).isTrue();
+            assertThat(item.getAsInt()).isEqualTo(locationTypeList.get(i).getLocationValue());
         }
     }
 
@@ -292,12 +299,13 @@ public class DeviceTest {
             statusList = gson.fromJson(reader, listType);
         }
 
-        assertThat(statusList, is(notNullValue()));
-        assertThat(statusList, hasSize(3));
-        assertThat(statusList, contains(
-                Device.DeviceStatus.OFFLINE,
-                Device.DeviceStatus.ONLINE,
-                null));
+        assertThat(statusList)
+                .isNotNull()
+                .hasSize(3)
+                .contains(
+                        Device.DeviceStatus.OFFLINE,
+                        Device.DeviceStatus.ONLINE,
+                        null);
     }
 
     @Test
@@ -309,14 +317,14 @@ public class DeviceTest {
         String jsonString = gson.toJson(statusList, listType);
 
         JsonElement element = gson.fromJson(jsonString, JsonElement.class);
-        assertThat(element.isJsonArray(), is(true));
+        assertThat(element.isJsonArray()).isTrue();
         JsonArray array = element.getAsJsonArray();
-        assertThat(array.size(), is(2));
+        assertThat(array.size()).isEqualTo(2);
         for (int i = 0; i < array.size(); i++) {
             JsonElement item = array.get(i);
-            assertThat(item.isJsonPrimitive(), is(true));
-            assertThat(item.getAsJsonPrimitive().isString(), is(true));
-            assertThat(item.getAsString(), is(statusList.get(i).name().toLowerCase()));
+            assertThat(item.isJsonPrimitive()).isTrue();
+            assertThat(item.getAsJsonPrimitive().isString()).isTrue();
+            assertThat(item.getAsString()).isEqualTo(statusList.get(i).name().toLowerCase());
         }
     }
 
@@ -329,16 +337,16 @@ public class DeviceTest {
             statusList = gson.fromJson(reader, listType);
         }
 
-        assertThat(statusList, is(notNullValue()));
-        assertThat(statusList, hasSize(6));
-        assertThat(statusList, contains(
-                Device.BatteryStatus.UNKNOWN,
-                Device.BatteryStatus.CHARGING,
-                Device.BatteryStatus.DISCHARGING,
-                Device.BatteryStatus.NOT_CHARGING,
-                Device.BatteryStatus.FULL,
-                null));
-
+        assertThat(statusList)
+                .isNotNull()
+                .hasSize(6)
+                .contains(
+                        Device.BatteryStatus.UNKNOWN,
+                        Device.BatteryStatus.CHARGING,
+                        Device.BatteryStatus.DISCHARGING,
+                        Device.BatteryStatus.NOT_CHARGING,
+                        Device.BatteryStatus.FULL,
+                        null);
     }
 
     @Test
@@ -349,14 +357,14 @@ public class DeviceTest {
         String jsonString = gson.toJson(statusList, listType);
 
         JsonElement element = gson.fromJson(jsonString, JsonElement.class);
-        assertThat(element.isJsonArray(), is(true));
+        assertThat(element.isJsonArray()).isTrue();
         JsonArray array = element.getAsJsonArray();
-        assertThat(array.size(), is(2));
+        assertThat(array.size()).isEqualTo(2);
         for (int i = 0; i < array.size(); i++) {
             JsonElement item = array.get(i);
-            assertThat(item.isJsonPrimitive(), is(true));
-            assertThat(item.getAsJsonPrimitive().isString(), is(true));
-            assertThat(item.getAsString(), is(statusList.get(i).name().toLowerCase()));
+            assertThat(item.isJsonPrimitive()).isTrue();
+            assertThat(item.getAsJsonPrimitive().isString()).isTrue();
+            assertThat(item.getAsString()).isEqualTo(statusList.get(i).name().toLowerCase());
         }
     }
 
@@ -370,17 +378,18 @@ public class DeviceTest {
             batteryHealths = gson.fromJson(reader, listType);
         }
 
-        assertThat(batteryHealths, is(notNullValue()));
-        assertThat(batteryHealths, hasSize(8));
-        assertThat(batteryHealths, contains(
-                Device.BatteryHealth.UNKNOWN,
-                Device.BatteryHealth.GOOD,
-                Device.BatteryHealth.OVERHEAT,
-                Device.BatteryHealth.DEAD,
-                Device.BatteryHealth.OVER_VOLTAGE,
-                Device.BatteryHealth.UNSPECIFIED_FAILURE,
-                Device.BatteryHealth.COLD,
-                null));
+        assertThat(batteryHealths)
+                .isNotNull()
+                .hasSize(8)
+                .contains(
+                        Device.BatteryHealth.UNKNOWN,
+                        Device.BatteryHealth.GOOD,
+                        Device.BatteryHealth.OVERHEAT,
+                        Device.BatteryHealth.DEAD,
+                        Device.BatteryHealth.OVER_VOLTAGE,
+                        Device.BatteryHealth.UNSPECIFIED_FAILURE,
+                        Device.BatteryHealth.COLD,
+                        null);
     }
 
     @Test
@@ -390,17 +399,18 @@ public class DeviceTest {
 
         Type listType = new TypeToken<List<Device.BatteryHealth>>(){}.getType();
         String jsonString = gson.toJson(healths, listType);
-        assertThat(jsonString, is(notNullValue()));
+        assertThat(jsonString).isNotNull();
 
         JsonElement element = gson.fromJson(jsonString, JsonElement.class);
-        assertThat(element.isJsonArray(), is(true));
+        assertThat(element.isJsonArray()).isTrue();
         JsonArray array = element.getAsJsonArray();
-        assertThat(array.size(), is(3));
+        assertThat(array.size()).isEqualTo(3);
         for (int i = 0; i < array.size(); i++) {
             JsonElement item = array.get(i);
-            assertThat(item.isJsonPrimitive(), is(true));
-            assertThat(item.getAsJsonPrimitive().isString(), is(true));
-            assertThat(item.getAsJsonPrimitive().getAsString(), is(healths.get(i).name().toLowerCase()));
+            assertThat(item.isJsonPrimitive()).isTrue();
+            assertThat(item.getAsJsonPrimitive().isString()).isTrue();
+            assertThat(item.getAsJsonPrimitive().getAsString())
+                    .isEqualTo(healths.get(i).name().toLowerCase());
         }
     }
 
@@ -412,11 +422,9 @@ public class DeviceTest {
             charge = gson.fromJson(reader, Device.BatteryCharge.class);
         }
 
-        assertThat(charge, is(notNullValue()));
-        assertThat(charge.getPluggedTimes(), hasSize(3));
-        assertThat(charge.getPluggedTimes(), contains(1, 2, 3));
-        assertThat(charge.getDispluggedTimes(), hasSize(2));
-        assertThat(charge.getDispluggedTimes(), contains(10, 20));
+        assertThat(charge).isNotNull();
+        assertThat(charge.getPluggedTimes()).isNotNull().hasSize(3).contains(1, 2, 3);
+        assertThat(charge.getDispluggedTimes()).isNotNull().hasSize(2).contains(10, 20);
     }
 
     @Test
@@ -429,27 +437,27 @@ public class DeviceTest {
         String jsonString = gson.toJson(charge, Device.BatteryCharge.class);
 
         JsonElement element = gson.fromJson(jsonString, JsonElement.class);
-        assertThat(element.isJsonObject(), is(true));
+        assertThat(element.isJsonObject()).isTrue();
         JsonObject chargeJson = element.getAsJsonObject();
-        assertThat(chargeJson.has("pluggedTime"), is(true));
-        assertThat(chargeJson.get("pluggedTime").isJsonArray(), is(true));
+        assertThat(chargeJson.has("pluggedTime")).isTrue();
+        assertThat(chargeJson.get("pluggedTime").isJsonArray()).isTrue();
         JsonArray pluggedArray = chargeJson.getAsJsonArray("pluggedTime");
-        assertThat(pluggedArray.size(), is(charge.getPluggedTimes().size()));
+        assertThat(pluggedArray.size()).isEqualTo(charge.getPluggedTimes().size());
         for (int i = 0; i < pluggedArray.size(); i++) {
             JsonElement item = pluggedArray.get(i);
-            assertThat(item.isJsonPrimitive(), is(true));
-            assertThat(item.getAsJsonPrimitive().isNumber(),is(true));
-            assertThat(item.getAsInt(), is(charge.getPluggedTimes().get(i)));
+            assertThat(item.isJsonPrimitive()).isTrue();
+            assertThat(item.getAsJsonPrimitive().isNumber()).isTrue();
+            assertThat(item.getAsInt()).isEqualTo(charge.getPluggedTimes().get(i));
         }
-        assertThat(chargeJson.has("displuggedTime"), is(true));
-        assertThat(chargeJson.get("displuggedTime").isJsonArray(), is(true));
+        assertThat(chargeJson.has("displuggedTime")).isTrue();
+        assertThat(chargeJson.get("displuggedTime").isJsonArray()).isTrue();
         JsonArray displuggedArray = chargeJson.getAsJsonArray("displuggedTime");
-        assertThat(displuggedArray.size(), is(charge.getDispluggedTimes().size()));
+        assertThat(displuggedArray.size()).isEqualTo(charge.getDispluggedTimes().size());
         for (int i = 0; i < displuggedArray.size(); i++) {
             JsonElement item = displuggedArray.get(i);
-            assertThat(item.isJsonPrimitive(), is(true));
-            assertThat(item.getAsJsonPrimitive().isNumber(),is(true));
-            assertThat(item.getAsInt(), is(charge.getDispluggedTimes().get(i)));
+            assertThat(item.isJsonPrimitive()).isTrue();
+            assertThat(item.getAsJsonPrimitive().isNumber()).isTrue();
+            assertThat(item.getAsInt()).isEqualTo(charge.getDispluggedTimes().get(i));
         }
     }
 

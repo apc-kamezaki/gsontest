@@ -11,11 +11,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestaurantTest {
     private Gson gson;
@@ -33,54 +29,57 @@ public class RestaurantTest {
             restaurant = gson.fromJson(reader, Restaurant.class);
         }
 
-        assertThat(restaurant, is(notNullValue()));
-        assertThat(restaurant.getName(), is("Restaurant ZERO"));
-        assertThat(restaurant.getUrl(), is("http://www.zero.example.com"));
-        assertThat(restaurant.getAddress(), is("TOKYO, BERLIN"));
-        assertThat(restaurant.getPostCode(), is("xxx-000"));
-        assertThat(restaurant.getPhoneNumber(), is("000-123-456"));
-        assertThat(restaurant.getEmail(), is("info@zero.example.com"));
-        assertThat(restaurant.getGeo(), is("Geo string"));
-        assertThat(restaurant.getCurrency(), is("USD"));
-        assertThat(restaurant.getServices(), hasSize(2));
+        assertThat(restaurant).isNotNull();
+        assertThat(restaurant.getName()).isEqualTo("Restaurant ZERO");
+        assertThat(restaurant.getUrl()).isEqualTo("http://www.zero.example.com");
+        assertThat(restaurant.getAddress()).isEqualTo("TOKYO, BERLIN");
+        assertThat(restaurant.getPostCode()).isEqualTo("xxx-000");
+        assertThat(restaurant.getPhoneNumber()).isEqualTo("000-123-456");
+        assertThat(restaurant.getEmail()).isEqualTo("info@zero.example.com");
+        assertThat(restaurant.getGeo()).isEqualTo("Geo string");
+        assertThat(restaurant.getCurrency()).isEqualTo("USD");
+        assertThat(restaurant.getServices()).isNotNull().hasSize(2);
         {
             // service 1
             Duration duration = restaurant.getServices().get(0);
-            assertThat(duration.getTimeslot(), is(Duration.TimeSlot.MORNING));
-            assertThat(duration.getDays(), hasSize(2));
-            assertThat(duration.getDays(), contains(Duration.DayOfWeek.MON, Duration.DayOfWeek.FRI));
+            assertThat(duration.getTimeslot()).isEqualTo(Duration.TimeSlot.MORNING);
+            assertThat(duration.getDays())
+                    .isNotNull()
+                    .hasSize(2)
+                    .contains(Duration.DayOfWeek.MON, Duration.DayOfWeek.FRI);
         }
         {
             // service 2
             Duration duration = restaurant.getServices().get(1);
-            assertThat(duration.getTimeslot(), is(Duration.TimeSlot.LUNCH));
-            assertThat(duration.getDays(), hasSize(0));
+            assertThat(duration.getTimeslot()).isEqualTo(Duration.TimeSlot.LUNCH);
+            assertThat(duration.getDays()).isNotNull().hasSize(0);
         }
-        assertThat(restaurant.getHeaderStyle(), is(notNullValue()));
-        assertThat(restaurant.getHeaderStyle().getBackLabel(), is("BACK"));
-        assertThat(restaurant.getLogoStyle(), is(notNullValue()));
-        assertThat(restaurant.getLogoStyle().getType(), is(Restaurant.LogoStyleType.ICON));
-        assertThat(restaurant.getThemeColor(), is(100));
-        assertThat(restaurant.isUseBasket(), is(true));
-        assertThat(restaurant.isShowPrice(), is(false));
-        assertThat(restaurant.getEntryPoint(), is(notNullValue()));
-        assertThat(restaurant.getEntryPoint().getTarget(), is("target0"));
-        assertThat(restaurant.getStyle(), is(notNullValue()));
-        assertThat(restaurant.getStyle().getFont().getName(), is("font_name"));
-        assertThat(restaurant.getSideMenu(), hasSize(2));
+        assertThat(restaurant.getHeaderStyle()).isNotNull();
+        assertThat(restaurant.getHeaderStyle().getBackLabel()).isEqualTo("BACK");
+        assertThat(restaurant.getLogoStyle()).isNotNull();
+        assertThat(restaurant.getLogoStyle().getType()).isEqualTo(Restaurant.LogoStyleType.ICON);
+        assertThat(restaurant.getThemeColor()).isEqualTo(100);
+        assertThat(restaurant.isUseBasket()).isTrue();
+        assertThat(restaurant.isShowPrice()).isFalse();
+        assertThat(restaurant.getEntryPoint()).isNotNull();
+        assertThat(restaurant.getEntryPoint().getTarget()).isEqualTo("target0");
+        assertThat(restaurant.getStyle()).isNotNull();
+        assertThat(restaurant.getStyle().getFont()).isNotNull();
+        assertThat(restaurant.getStyle().getFont().getName()).isEqualTo("font_name");
+        assertThat(restaurant.getSideMenu()).isNotNull().hasSize(2);
         {
             // side menu 1
             Restaurant.SideMenu sideMenu = restaurant.getSideMenu().get(0);
-            assertThat(sideMenu.getOrder(), is(1));
-            assertThat(sideMenu.getLink(), is(notNullValue()));
-            assertThat(sideMenu.getLink().getType(), is(DocumentType.MENU));
+            assertThat(sideMenu.getOrder()).isEqualTo(1);
+            assertThat(sideMenu.getLink()).isNotNull();
+            assertThat(sideMenu.getLink().getType()).isEqualTo(DocumentType.MENU);
         }
         {
             // side menu 2
             Restaurant.SideMenu sideMenu = restaurant.getSideMenu().get(1);
-            assertThat(sideMenu.getOrder(), is(3));
-            assertThat(sideMenu.getLink(), is(notNullValue()));
-            assertThat(sideMenu.getLink().getType(), is(DocumentType.DASHBOARD));
+            assertThat(sideMenu.getOrder()).isEqualTo(3);
+            assertThat(sideMenu.getLink()).isNotNull();
+            assertThat(sideMenu.getLink().getType()).isEqualTo(DocumentType.DASHBOARD);
 
         }
     }
@@ -93,12 +92,12 @@ public class RestaurantTest {
             headerStyle = gson.fromJson(reader, Restaurant.HeaderStyle.class);
         }
 
-        assertThat(headerStyle, is(notNullValue()));
-        assertThat(headerStyle.getImageId(), is("Header image id"));
-        assertThat(headerStyle.getColor(), is(10));
-        assertThat(headerStyle.getBackgroundColor(), is(20));
-        assertThat(headerStyle.getBackLabel(), is("BACK"));
-        assertThat(headerStyle.getHomeLabel(), is("HOME"));
+        assertThat(headerStyle).isNotNull();
+        assertThat(headerStyle.getImageId()).isEqualTo("Header image id");
+        assertThat(headerStyle.getColor()).isEqualTo(10);
+        assertThat(headerStyle.getBackgroundColor()).isEqualTo(20);
+        assertThat(headerStyle.getBackLabel()).isEqualTo("BACK");
+        assertThat(headerStyle.getHomeLabel()).isEqualTo("HOME");
     }
 
     @Test
@@ -109,10 +108,10 @@ public class RestaurantTest {
             logoStyle = gson.fromJson(reader, Restaurant.LogoStyle.class);
         }
 
-        assertThat(logoStyle, is(notNullValue()));
-        assertThat(logoStyle.getImageId(), is("logo image id"));
-        assertThat(logoStyle.getBackgroundColor(), is(10));
-        assertThat(logoStyle.getType(), is(Restaurant.LogoStyleType.WIDE));
+        assertThat(logoStyle).isNotNull();
+        assertThat(logoStyle.getImageId()).isEqualTo("logo image id");
+        assertThat(logoStyle.getBackgroundColor()).isEqualTo(10);
+        assertThat(logoStyle.getType()).isEqualTo(Restaurant.LogoStyleType.WIDE);
     }
 
     @Test
@@ -124,8 +123,12 @@ public class RestaurantTest {
             list = gson.fromJson(reader, listType);
         }
 
-        assertThat(list, hasSize(3));
-        assertThat(list, contains(Restaurant.LogoStyleType.ICON, Restaurant.defaultLogoStyleType, Restaurant.LogoStyleType.WIDE));
-
+        assertThat(list)
+                .isNotNull()
+                .hasSize(3)
+                .contains(
+                        Restaurant.LogoStyleType.ICON,
+                        Restaurant.defaultLogoStyleType,
+                        Restaurant.LogoStyleType.WIDE);
     }
 }
