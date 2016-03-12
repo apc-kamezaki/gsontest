@@ -11,11 +11,8 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class DocumentTypeTest {
     private Gson gson;
@@ -34,13 +31,14 @@ public class DocumentTypeTest {
             documentTypes = gson.fromJson(reader, listType);
         }
 
-        assertThat(documentTypes, is(notNullValue()));
-        assertThat(documentTypes, hasSize(5));
-        assertThat(documentTypes, contains(
-                DocumentType.WELCOME,
-                DocumentType.DASHBOARD,
-                DocumentType.CONTENT,
-                DocumentType.MENU,
-                null));
+        assertThat(documentTypes)
+                .isNotNull()
+                .hasSize(5)
+                .contains(
+                        DocumentType.WELCOME,
+                        DocumentType.DASHBOARD,
+                        DocumentType.CONTENT,
+                        DocumentType.MENU,
+                        null);
     }
 }

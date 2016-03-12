@@ -11,10 +11,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class InfoTest {
     private Gson gson;
@@ -33,57 +30,56 @@ public class InfoTest {
             infoList = gson.fromJson(reader, listType);
         }
 
-        assertThat(infoList, is(notNullValue()));
-        assertThat(infoList.size(), is(6));
+        assertThat(infoList).isNotNull().hasSize(6);
 
         // type in page
         {
             MenuItem.Info info = infoList.get(0);
-            assertThat(info.getType(), is(MenuItem.InfoType.INPAGE));
-            assertThat(info.getDescription(), is("description"));
+            assertThat(info.getType()).isEqualTo(MenuItem.InfoType.INPAGE);
+            assertThat(info.getDescription()).isEqualTo("description");
         }
 
         // type full and quarter size
         {
             MenuItem.Info info = infoList.get(1);
-            assertThat(info.getType(), is(MenuItem.InfoType.FULL));
-            assertThat(info.getSize(), is(ImageSize.QUARTER));
-            assertThat(info.getDescription(), is(nullValue()));
+            assertThat(info.getType()).isEqualTo(MenuItem.InfoType.FULL);
+            assertThat(info.getSize()).isEqualTo(ImageSize.QUARTER);
+            assertThat(info.getDescription()).isNull();
 
         }
 
         // type full and third size
         {
             MenuItem.Info info = infoList.get(2);
-            assertThat(info.getType(), is(MenuItem.InfoType.FULL));
-            assertThat(info.getSize(), is(ImageSize.THIRD));
-            assertThat(info.getDescription(), is(nullValue()));
+            assertThat(info.getType()).isEqualTo(MenuItem.InfoType.FULL);
+            assertThat(info.getSize()).isEqualTo(ImageSize.THIRD);
+            assertThat(info.getDescription()).isNull();
 
         }
 
         // type full and half size
         {
             MenuItem.Info info = infoList.get(3);
-            assertThat(info.getType(), is(MenuItem.InfoType.FULL));
-            assertThat(info.getSize(), is(ImageSize.HALF));
-            assertThat(info.getDescription(), is("description for half"));
+            assertThat(info.getType()).isEqualTo(MenuItem.InfoType.FULL);
+            assertThat(info.getSize()).isEqualTo(ImageSize.HALF);
+            assertThat(info.getDescription()).isEqualTo("description for half");
 
         }
 
         // type full and full size
         {
             MenuItem.Info info = infoList.get(4);
-            assertThat(info.getType(), is(MenuItem.InfoType.FULL));
-            assertThat(info.getSize(), is(ImageSize.FULL));
-            assertThat(info.getDescription(), is("description for full"));
+            assertThat(info.getType()).isEqualTo(MenuItem.InfoType.FULL);
+            assertThat(info.getSize()).isEqualTo(ImageSize.FULL);
+            assertThat(info.getDescription()).isEqualTo("description for full");
         }
 
         // type null
         {
             MenuItem.Info info = infoList.get(5);
-            assertThat(info.getType(), is(MenuItem.InfoType.NONE));
-            assertThat(info.getSize(), is(ImageSize.NONE));
-            assertThat(info.getDescription(), is("description for none"));
+            assertThat(info.getType()).isEqualTo(MenuItem.InfoType.NONE);
+            assertThat(info.getSize()).isEqualTo(ImageSize.NONE);
+            assertThat(info.getDescription()).isEqualTo("description for none");
 
         }
     }

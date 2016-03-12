@@ -8,10 +8,8 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class WelcomeTest {
     private Gson gson;
@@ -29,23 +27,31 @@ public class WelcomeTest {
             welcome = gson.fromJson(reader, Welcome.class);
         }
 
-        assertThat(welcome, is(notNullValue()));
-        assertThat(welcome.getRestaurantId(), is("welcome_restId"));
+        assertThat(welcome).isNotNull();
+        assertThat(welcome.getRestaurantId())
+                .isNotNull()
+                .isEqualTo("welcome_restId");
         // style
         {
-            assertThat(welcome.getStyle(), is(notNullValue()));
-            assertThat(welcome.getStyle().getBackground(), is(notNullValue()));
-            assertThat(welcome.getStyle().getBackground().getImageId(), is("bg_id"));
+            assertThat(welcome.getStyle()).isNotNull();
+            assertThat(welcome.getStyle().getBackground()).isNotNull();
+            assertThat(welcome.getStyle().getBackground().getImageId()).isEqualTo("bg_id");
 
-            assertThat(welcome.getStyle().getFont(), is(notNullValue()));
-            assertThat(welcome.getStyle().getFont().getName(), is("font_name"));
+            assertThat(welcome.getStyle().getFont()).isNotNull();
+            assertThat(welcome.getStyle().getFont().getName()).isEqualTo("font_name");
         }
-        assertThat(welcome.getLanguages(), hasItems("en", "fr"));
+        assertThat(welcome.getLanguages())
+                .isNotNull()
+                .contains("en", "fr");
         // ads
-        assertThat(welcome.getAds(), is(notNullValue()));
-        assertThat(welcome.getAds().getCatchPhrase(), is("ad phrase"));
-        assertThat(welcome.getAds().getLink(), is(notNullValue()));
-        assertThat(welcome.getAds().getLink().getType(), is(DocumentType.MENU));
+        assertThat(welcome.getAds()).isNotNull();
+        assertThat(welcome.getAds().getCatchPhrase())
+                .isNotNull()
+                .isEqualTo("ad phrase");
+        assertThat(welcome.getAds().getLink()).isNotNull();
+        assertThat(welcome.getAds().getLink().getType())
+                .isNotNull()
+                .isEqualTo(DocumentType.MENU);
     }
 
 }

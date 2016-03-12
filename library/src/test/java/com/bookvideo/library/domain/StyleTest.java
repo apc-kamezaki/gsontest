@@ -8,10 +8,7 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StyleTest {
     private Gson gson;
@@ -28,42 +25,44 @@ public class StyleTest {
             style = gson.fromJson(reader, Style.class);
         }
 
-        assertThat(style, is(notNullValue()));
+        assertThat(style).isNotNull();
 
         // bg
         {
-            assertThat(style.getBackground(), is(notNullValue()));
-            assertThat(style.getBackground().getImageId(), is(equalTo("bg_id")));
-            assertThat(style.getBackground().getColor(), is(equalTo(1)));
-            assertThat(style.getBackground().getType(), is(equalTo(Style.Type.WIDE)));
+            assertThat(style.getBackground()).isNotNull();
+            assertThat(style.getBackground().getImageId()).isEqualTo("bg_id");
+            assertThat(style.getBackground().getColor()).isEqualTo(1);
+            assertThat(style.getBackground().getType()).isEqualTo(Style.Type.WIDE);
         }
 
         // padding
         {
-            assertThat(style.getPadding(), is(notNullValue()));
-            assertThat(style.getPadding().getHorizontalPadding(), is(equalTo(10)));
-            assertThat(style.getPadding().getVerticalPadding(), is(equalTo(20)));
+            assertThat(style.getPadding()).isNotNull();;
+            assertThat(style.getPadding().getHorizontalPadding()).isEqualTo(10);
+            assertThat(style.getPadding().getVerticalPadding()).isEqualTo(20);
         }
 
         // label
         {
-            assertThat(style.getLabel(), is(notNullValue()));
-            assertThat(style.getLabel().getBackgroundImageId(), is(equalTo("label_bg_id")));
-            assertThat(style.getLabel().getBackgroundColor(), is(equalTo(2)));
-            assertThat(style.getLabel().getColor(), is(equalTo(3)));
-            assertThat(style.getLabel().getAlign(), is(equalTo(Style.Align.CENTER)));
-            assertThat(style.getLabel().getStyle(), is(equalTo(Style.LabelStyle.HEIGHT)));
-            assertThat(style.getLabel().getBorderColor(), is(equalTo(4)));
-            assertThat(style.getLabel().getBorderSize(), is(equalTo(30)));
+            assertThat(style.getLabel()).isNotNull();
+            assertThat(style.getLabel().getBackgroundImageId())
+                    .isNotNull()
+                    .isEqualTo("label_bg_id");
+            assertThat(style.getLabel().getBackgroundColor()).isEqualTo(2);
+            assertThat(style.getLabel().getColor()).isEqualTo(3);
+            assertThat(style.getLabel().getAlign()).isEqualTo(Style.Align.CENTER);
+            assertThat(style.getLabel().getStyle()).isEqualTo(Style.LabelStyle.HEIGHT);
+            assertThat(style.getLabel().getBorderColor()).isEqualTo(4);
+            assertThat(style.getLabel().getBorderSize()).isEqualTo(30);
         }
 
         // font
         {
-            assertThat(style.getFont(), is(notNullValue()));
-            assertThat(style.getFont().getName(), is(equalTo("font_name")));
-            assertThat(style.getFont().getSize(), is(equalTo(40)));
-            assertThat(style.getFont().getColor(), is(equalTo(5)));
-            assertThat(style.getFont().getAlign(), is(equalTo(Style.Align.RIGHT)));
+            assertThat(style.getFont()).isNotNull();
+            assertThat(style.getFont().getName()).isEqualTo("font_name");
+            assertThat(style.getFont().getSize()).isEqualTo(40);
+            assertThat(style.getFont().getColor()).isEqualTo(5);
+            assertThat(style.getFont().getAlign()).isEqualTo(Style.Align.RIGHT);
         }
     }
 }
