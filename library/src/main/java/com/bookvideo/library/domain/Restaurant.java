@@ -14,7 +14,8 @@ public class Restaurant {
     private String postCode;
     private String phoneNumber;
     private String email;
-    private String geo;
+    @SerializedName("geo")
+    private String geoId;
     private String currency;
     private List<Duration> services;
     @SerializedName("hStyle")
@@ -52,8 +53,8 @@ public class Restaurant {
         return email;
     }
 
-    public String getGeo() {
-        return geo;
+    public String getGeoId() {
+        return geoId;
     }
 
     public String getCurrency() {

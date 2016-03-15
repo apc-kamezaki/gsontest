@@ -36,7 +36,7 @@ public class RestaurantTest {
         assertThat(restaurant.getPostCode()).isEqualTo("xxx-000");
         assertThat(restaurant.getPhoneNumber()).isEqualTo("000-123-456");
         assertThat(restaurant.getEmail()).isEqualTo("info@zero.example.com");
-        assertThat(restaurant.getGeo()).isEqualTo("Geo string");
+        assertThat(restaurant.getGeoId()).isEqualTo("geo schema id");
         assertThat(restaurant.getCurrency()).isEqualTo("USD");
         assertThat(restaurant.getServices()).isNotNull().hasSize(2);
         {

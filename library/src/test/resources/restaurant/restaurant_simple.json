@@ -5,7 +5,7 @@
   "postCode": "xxx-000",
   "phoneNumber": "000-123-456",
   "email": "info@zero.example.com",
-  "geo": "Geo string",
+  "geo": "geo schema id",
   "currency": "USD",
   "services": [
     {
