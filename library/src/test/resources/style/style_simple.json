@@ -21,7 +21,12 @@
     "name": "font_name",
     "size": 40,
     "color": 5,
-    "align": "right"
+    "align": "right",
+    "letterSpacing": 10
+  },
+  "line": {
+    "type": "dashed"
   }
+
 
 }

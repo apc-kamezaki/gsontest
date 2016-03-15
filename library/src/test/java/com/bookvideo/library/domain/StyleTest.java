@@ -63,6 +63,13 @@ public class StyleTest {
             assertThat(style.getFont().getSize()).isEqualTo(40);
             assertThat(style.getFont().getColor()).isEqualTo(5);
             assertThat(style.getFont().getAlign()).isEqualTo(Style.Align.RIGHT);
+            assertThat(style.getFont().getLetterSpacing()).isEqualTo(10);
+        }
+
+        // line
+        {
+            assertThat(style.getLine()).isNotNull();
+            assertThat(style.getLine().getType()).isEqualTo(Style.LineType.DASHED);
         }
     }
 }

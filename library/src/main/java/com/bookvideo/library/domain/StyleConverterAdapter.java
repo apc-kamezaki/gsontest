@@ -14,6 +14,7 @@ public class StyleConverterAdapter implements DomainConverterAdapter {
         gsonBuilder.registerTypeAdapter(Style.Type.class, new StyleTypeConvereter());
         gsonBuilder.registerTypeAdapter(Style.Align.class, new StyleAlignConverter());
         gsonBuilder.registerTypeAdapter(Style.LabelStyle.class, new StyleLabelStyleConverter());
+        gsonBuilder.registerTypeAdapter(Style.LineType.class, new LineTypeConverter());
     }
 
     private static class StyleTypeConvereter implements JsonDeserializer<Style.Type> {
@@ -48,6 +49,18 @@ public class StyleConverterAdapter implements DomainConverterAdapter {
                 return Style.LabelStyle.valueOf(json.getAsJsonPrimitive().getAsString().toUpperCase());
             } catch (Exception e) {
                 return Style.defaultLabelStyle;
+            }
+        }
+    }
+
+    private static class LineTypeConverter implements  JsonDeserializer<Style.LineType> {
+        @Override
+        public Style.LineType deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+                throws JsonParseException {
+            try {
+                return Style.LineType.valueOf(json.getAsJsonPrimitive().getAsString().toUpperCase());
+            } catch (Exception e) {
+                return Style.defaultLineType;
             }
         }
     }

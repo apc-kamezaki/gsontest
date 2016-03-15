@@ -3,15 +3,17 @@ package com.bookvideo.library.domain;
 import com.google.gson.annotations.SerializedName;
 
 public class Style {
-    public static final Style.Type defaultType = Style.Type.CROP;
-    public static final Style.Align defaultAlign = Style.Align.LEFT;
-    public static final Style.LabelStyle defaultLabelStyle = Style.LabelStyle.WRAP;
+    public static final Type defaultType = Type.CROP;
+    public static final Align defaultAlign = Align.LEFT;
+    public static final LabelStyle defaultLabelStyle = LabelStyle.WRAP;
+    public static final LineType defaultLineType = LineType.PLAIN;
 
     @SerializedName("bg")
     private Background background;
     private Padding padding;
     private Label label;
     private Font font;
+    private Line line;
 
     public Background getBackground() {
         return background;
@@ -27,6 +29,10 @@ public class Style {
 
     public Font getFont() {
         return font;
+    }
+
+    public Line getLine() {
+        return line;
     }
 
     public static class Background {
@@ -106,6 +112,7 @@ public class Style {
         private String name;
         private int size;
         private int color;
+        private int letterSpacing;
         private Align align = defaultAlign;
 
         public String getName() {
@@ -120,8 +127,20 @@ public class Style {
             return color;
         }
 
+        public int getLetterSpacing() {
+            return letterSpacing;
+        }
+
         public Align getAlign() {
             return align;
+        }
+    }
+
+    public static class Line {
+        private LineType type = defaultLineType;
+
+        public LineType getType() {
+            return type;
         }
     }
 
@@ -136,4 +155,9 @@ public class Style {
     public enum LabelStyle {
         WRAP, WIDTH, HEIGHT
     }
+
+    public enum LineType {
+        PLAIN, DASHED
+    }
+
 }
