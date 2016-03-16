@@ -8,11 +8,16 @@ import java.util.List;
 public class Menu {
     @SerializedName("restId")
     private String restaurantId;
+    private String title;
     private Style style;
     private List<Page> pages;
 
     public String getRestaurantId() {
         return restaurantId;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public Style getStyle() {

@@ -1,5 +1,6 @@
 {
   "restId": "menu_id",
+  "title": "menu title",
   "style": {
     "label": {
       "bgColor": 2,

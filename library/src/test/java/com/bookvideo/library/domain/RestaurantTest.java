@@ -38,6 +38,7 @@ public class RestaurantTest {
         assertThat(restaurant.getEmail()).isEqualTo("info@zero.example.com");
         assertThat(restaurant.getGeoId()).isEqualTo("geo schema id");
         assertThat(restaurant.getCurrency()).isEqualTo("USD");
+        assertThat(restaurant.getLanguages()).isNotNull().hasSize(2).contains("en", "fr");
         assertThat(restaurant.getServices()).isNotNull().hasSize(2);
         {
             // service 1

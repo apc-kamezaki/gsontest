@@ -31,6 +31,7 @@ public class WelcomeTest {
         assertThat(welcome.getRestaurantId())
                 .isNotNull()
                 .isEqualTo("welcome_restId");
+        assertThat(welcome.getTitle()).isEqualTo("welcome title");
         // style
         {
             assertThat(welcome.getStyle()).isNotNull();
@@ -40,9 +41,6 @@ public class WelcomeTest {
             assertThat(welcome.getStyle().getFont()).isNotNull();
             assertThat(welcome.getStyle().getFont().getName()).isEqualTo("font_name");
         }
-        assertThat(welcome.getLanguages())
-                .isNotNull()
-                .contains("en", "fr");
         // ads
         assertThat(welcome.getAds()).isNotNull();
         assertThat(welcome.getAds().getCatchPhrase())

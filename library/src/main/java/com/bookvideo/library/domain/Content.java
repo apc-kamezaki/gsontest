@@ -8,12 +8,17 @@ import java.util.List;
 public class Content {
     @SerializedName("restId")
     private String restaurantId;
+    private String title;
     private ContentType type;
     private Style style;
     private List<ContentPage> pages;
 
     public String getRestaurantId() {
         return restaurantId;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public ContentType getType() {
@@ -56,7 +61,6 @@ public class Content {
         private int order;
         private String text;
         private Style style;
-        private Link link;
 
         public ContentItemType getType() {
             return type;
@@ -74,9 +78,6 @@ public class Content {
             return style;
         }
 
-        public com.bookvideo.library.domain.Link getLink() {
-            return link;
-        }
     }
 
     public enum ContentType {

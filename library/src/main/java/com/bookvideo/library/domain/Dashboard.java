@@ -8,11 +8,16 @@ import java.util.List;
 public class Dashboard {
     @SerializedName("restId")
     private String restaurantId;
+    private String title;
     private Type type;
     private List<DashboardItem> children;
 
     public String getRestaurantId() {
         return restaurantId;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public Type getType() {
@@ -29,7 +34,6 @@ public class Dashboard {
         private String iconId;
         private Style style;
         private int arrow;
-        private String text;
         private List<Duration> durations;
         private Link link;
 
@@ -47,10 +51,6 @@ public class Dashboard {
 
         public int getArrow() {
             return arrow;
-        }
-
-        public String getText() {
-            return text;
         }
 
         public List<Duration> getDurations() {

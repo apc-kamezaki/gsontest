@@ -17,6 +17,8 @@ public class Restaurant {
     @SerializedName("geo")
     private String geoId;
     private String currency;
+    @SerializedName("lang")
+    private List<String> languages;
     private List<Duration> services;
     @SerializedName("hStyle")
     private HeaderStyle headerStyle;
@@ -59,6 +61,10 @@ public class Restaurant {
 
     public String getCurrency() {
         return currency;
+    }
+
+    public List<String> getLanguages() {
+        return languages != null ? Collections.unmodifiableList(languages) : Collections.<String>emptyList();
     }
 
     public List<Duration> getServices() {

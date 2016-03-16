@@ -8,9 +8,8 @@ import java.util.List;
 public class Welcome {
     @SerializedName("restId")
     private String restaurantId;
+    private String title;
     private Style style;
-    @SerializedName("lang")
-    private List<String> languages;
     private Ads ads;
     private Link link;
 
@@ -18,12 +17,12 @@ public class Welcome {
         return restaurantId;
     }
 
-    public Style getStyle() {
-        return style;
+    public String getTitle() {
+        return title;
     }
 
-    public List<String> getLanguages() {
-        return languages != null ? Collections.unmodifiableList(languages) : Collections.<String>emptyList();
+    public Style getStyle() {
+        return style;
     }
 
     public Ads getAds() {

@@ -31,6 +31,7 @@ public class ContentTest {
 
         assertThat(content).isNotNull();
         assertThat(content.getRestaurantId()).isEqualTo("content_restaurant_id");
+        assertThat(content.getTitle()).isEqualTo("title1");
         assertThat(content.getType()).isEqualTo(Content.ContentType.CONTENT);
         {
             Style style = content.getStyle();
@@ -63,9 +64,6 @@ public class ContentTest {
                 assertThat(item.getStyle().getFont().getAlign())
                         .isNotNull()
                         .isEqualTo(Style.Align.RIGHT);
-                assertThat(item.getLink()).isNotNull();
-                assertThat(item.getLink().getType()).isEqualTo(DocumentType.CONTENT);
-                assertThat(item.getLink().getData()).isEqualTo("data1");
             }
         }
 
@@ -90,9 +88,6 @@ public class ContentTest {
                 assertThat(item.getStyle().getBackground().getType())
                         .isNotNull()
                         .isEqualTo(Style.Type.CROP);
-                assertThat(item.getLink()).isNotNull();
-                assertThat(item.getLink().getType()).isEqualTo(DocumentType.MENU);
-                assertThat(item.getLink().getTarget()).isEqualTo("target2-1");
             }
 
             {
@@ -104,7 +99,6 @@ public class ContentTest {
                 assertThat(item.getStyle()).isNotNull();
                 assertThat(item.getStyle().getFont()).isNotNull();
                 assertThat(item.getStyle().getFont().getName()).isEqualTo("font_name");
-                assertThat(item.getLink().getType()).isEqualTo(DocumentType.DASHBOARD);
             }
         }
     }

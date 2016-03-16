@@ -1,5 +1,6 @@
 {
   "restId": "welcome_restId",
+  "title": "welcome title",
   "style":{
     "bg": {
       "image": "bg_id",
@@ -13,9 +14,6 @@
       "align": "right"
     }
   },
-  "lang" : [
-    "en", "fr"
-  ],
   "ads": {
     "catchPhrase": "ad phrase",
     "link": {

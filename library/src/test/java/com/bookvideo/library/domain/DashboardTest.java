@@ -31,6 +31,7 @@ public class DashboardTest {
 
         assertThat(dashboard).isNotNull();
         assertThat(dashboard.getRestaurantId()).isEqualTo("dashboard_id");
+        assertThat(dashboard.getTitle()).isEqualTo("dashboard title");
         assertThat(dashboard.getType()).isEqualTo(Dashboard.Type.GRID);
 
         assertThat(dashboard.getChildren()).isNotNull().hasSize(2);
@@ -42,7 +43,6 @@ public class DashboardTest {
             assertThat(item.getOrder()).isEqualTo(0);
             assertThat(item.getIconId()).isEqualTo("icon-id-0");
             assertThat(item.getArrow()).isEqualTo(10);
-            assertThat(item.getText()).isEqualTo("text0");
 
             // style
             Style style = item.getStyle();
@@ -77,7 +77,6 @@ public class DashboardTest {
             assertThat(item.getOrder()).isEqualTo(1);
             assertThat(item.getIconId()).isNull();
             assertThat(item.getArrow()).isEqualTo(20);
-            assertThat(item.getText()).isEqualTo("text1");
 
             Style style = item.getStyle();
             assertThat(style).isNotNull();

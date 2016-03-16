@@ -1,5 +1,6 @@
 {
   "restId": "content_restaurant_id",
+  "title": "title1",
   "type": "content",
   "style": {
     "bg": {
@@ -35,11 +36,6 @@
               "name": "font_name",
               "align": "right"
             }
-          },
-          "link": {
-            "type": "content",
-            "target": "target1",
-            "data": "data1"
           }
         }
       ]
@@ -58,11 +54,6 @@
               "color": 1,
               "type": "crop"
             }
-          },
-          "link": {
-            "type": "menu",
-            "target": "target2-1",
-            "data": "data2-1"
           }
         },
         {
@@ -76,16 +67,10 @@
               "color": 5,
               "align": "right"
             }
-          },
-          "link": {
-            "type": "dashboard",
-            "target": "target2-2",
-            "data": "data2-2"
           }
         }
       ]
 
     }
-
   ]
 }
