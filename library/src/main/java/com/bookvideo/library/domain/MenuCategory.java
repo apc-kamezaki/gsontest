@@ -46,7 +46,6 @@ public class MenuCategory {
     }
 
     public static class Item {
-        @SerializedName("id")
         private String itemId;
         private int order;
 

@@ -15,15 +15,15 @@
   ],
   "items": [
     {
-      "id": "item-1",
+      "itemId": "item-1",
       "order": 1
     },
     {
-      "id": "item-2",
+      "itemId": "item-2",
       "order": 3
     },
     {
-      "id": "item-3",
+      "itemId": "item-3",
       "order": 2
     }
   ]

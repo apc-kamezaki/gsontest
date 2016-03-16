@@ -26,7 +26,7 @@
       ],
       "categories": [
         {
-          "id": "category 1-1",
+          "categoryId": "category 1-1",
           "order": 1
         }
       ]
@@ -36,11 +36,11 @@
       "order": 20,
       "categories": [
         {
-          "id": "category 2-1",
+          "categoryId": "category 2-1",
           "order": 2
         },
         {
-          "id": "category 2-2",
+          "categoryId": "category 2-2",
           "order": 3
         }
       ]

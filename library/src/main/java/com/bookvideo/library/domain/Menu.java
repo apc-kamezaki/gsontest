@@ -52,7 +52,6 @@ public class Menu {
     }
 
     public static class Item {
-        @SerializedName("id")
         private String categoryId;
         private int order;
 
