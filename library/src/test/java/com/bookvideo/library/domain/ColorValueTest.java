@@ -1,7 +1,6 @@
 package com.bookvideo.library.domain;
 
 
-import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
@@ -10,8 +9,7 @@ import org.junit.runner.RunWith;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Theories.class)
-public class ColorUtilTest {
-
+public class ColorValueTest {
 
     @DataPoints
     public static Fixture[] fixtures = {
@@ -35,19 +33,20 @@ public class ColorUtilTest {
 
     @Theory
     public void colorTest(Fixture fixture) throws Exception {
+        ColorValue suv = new ColorValue(fixture.input);
 
-        assertThat(ColorUtil.fromString(fixture.rgba))
-                .as("verify %s", fixture.rgba)
+        assertThat(suv.getColor())
+                .as("verify %s", fixture.input)
                 .isEqualTo(fixture.expect);
 
     }
 
     static class Fixture {
-        public String rgba;
+        public String input;
         public int expect;
 
         public Fixture(String rgba, int expect) {
-            this.rgba = rgba;
+            this.input = rgba;
             this.expect = expect;
         }
 

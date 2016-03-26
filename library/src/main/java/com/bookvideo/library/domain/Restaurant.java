@@ -1,7 +1,5 @@
 package com.bookvideo.library.domain;
 
-import android.graphics.Color;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Collections;
