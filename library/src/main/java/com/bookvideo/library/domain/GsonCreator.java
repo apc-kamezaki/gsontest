@@ -9,6 +9,7 @@ public class GsonCreator {
 
     private GsonCreator() {
         new AllergenConverterAdapter().apply(gsonBuilder);
+        new ColorValueConverterAdapter().apply(gsonBuilder);
         new ContentConverterAdapter().apply(gsonBuilder);
         new DashboardConverterAdapter().apply(gsonBuilder);
         new DeviceConverterAdapter().apply(gsonBuilder);

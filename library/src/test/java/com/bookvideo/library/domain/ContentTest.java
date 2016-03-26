@@ -32,6 +32,8 @@ public class ContentTest {
         assertThat(content).isNotNull();
         assertThat(content.getRestaurantId()).isEqualTo("content_restaurant_id");
         assertThat(content.getTitle()).isEqualTo("title1");
+        assertThat(content.getDescription()).isEqualTo("description");
+        assertThat(content.isShowPageTitle()).isTrue();
         assertThat(content.getType()).isEqualTo(Content.ContentType.CONTENT);
         {
             Style style = content.getStyle();
@@ -48,7 +50,7 @@ public class ContentTest {
             Content.ContentPage page = content.getPages().get(0);
             assertThat(page.getTitle()).isEqualTo("page1");
             assertThat(page.getOrder()).isEqualTo(10);
-            assertThat(page.getDurations()).isNotNull().hasSize(2);
+            assertThat(page.getEvents()).isNotNull().hasSize(2);
             assertThat(page.getChildren()).isNotNull().hasSize(1);
 
             {
@@ -71,7 +73,7 @@ public class ContentTest {
             // page2
             Content.ContentPage page = content.getPages().get(1);
             assertThat(page.getTitle()).isEqualTo("page2");
-            assertThat(page.getDurations()).isNotNull().hasSize(0);
+            assertThat(page.getEvents()).isNotNull().hasSize(0);
             assertThat(page.getOrder()).isEqualTo(20);
 
             {
@@ -80,6 +82,7 @@ public class ContentTest {
                 assertThat(item.getType()).isEqualTo(Content.ContentItemType.IMAGE);
                 assertThat(item.getOrder()).isEqualTo(200);
                 assertThat(item.getText()).isEqualTo("item 2-1");
+                assertThat(item.isShowArrow()).isTrue();
                 assertThat(item.getStyle()).isNotNull();
                 assertThat(item.getStyle().getBackground()).isNotNull();
                 assertThat(item.getStyle().getBackground().getImageId())
@@ -96,6 +99,7 @@ public class ContentTest {
                 assertThat(item.getType()).isEqualTo(Content.ContentItemType.CONTACT);
                 assertThat(item.getOrder()).isEqualTo(210);
                 assertThat(item.getText()).isEqualTo("item 2-2");
+                assertThat(item.isShowArrow()).isFalse();
                 assertThat(item.getStyle()).isNotNull();
                 assertThat(item.getStyle().getFont()).isNotNull();
                 assertThat(item.getStyle().getFont().getName()).isEqualTo("font_name");

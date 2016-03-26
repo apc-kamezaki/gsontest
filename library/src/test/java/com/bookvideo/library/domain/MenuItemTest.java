@@ -47,8 +47,8 @@ public class MenuItemTest {
             assertThat(info.getSize()).isEqualTo(ImageSize.HALF);
             assertThat(info.getDescription()).isEqualTo("Info description");
         }
-        assertThat(menuItem.getDuration()).isNotNull();
-        assertThat(menuItem.getDuration().getDays())
+        assertThat(menuItem.getDurations()).isNotNull().hasSize(1);
+        assertThat(menuItem.getDurations().get(0).getDays())
                 .isNotNull()
                 .hasSize(2)
                 .contains(Duration.DayOfWeek.SAT, Duration.DayOfWeek.SUN);
@@ -61,7 +61,7 @@ public class MenuItemTest {
                 .hasSize(2)
                 .contains("suggest1_id", "suggest2_id");
         assertThat(menuItem.getCalories()).isEqualTo(321.0f);
-        assertThat(menuItem.getAlcohol()).isEqualTo("Alcohol string");
+        assertThat(menuItem.getAlcohol()).isEqualTo(12.4f);
         assertThat(menuItem.getAlg()).isNotNull().hasSize(1).contains(Allergen.NUTS);
         assertThat(menuItem.getSemiotics())
                 .isNotNull()

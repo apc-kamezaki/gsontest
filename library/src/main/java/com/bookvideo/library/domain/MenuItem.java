@@ -16,12 +16,12 @@ public class MenuItem {
     @SerializedName("desc")
     private String description;
     private Info info;
-    private Duration duration;
+    private List<Duration> durations;
     private List<Float> prices;
     private List<String> suggestions;
     private List<String> ingredients;
     private float calories;
-    private String alcohol;
+    private float alcohol;
     private List<Allergen> alg;
     @SerializedName("semiotic")
     private List<Semiotic> semiotics;
@@ -56,8 +56,9 @@ public class MenuItem {
         return info;
     }
 
-    public Duration getDuration() {
-        return duration;
+    public List<Duration> getDurations() {
+        return durations != null
+                ? Collections.unmodifiableList(durations) : Collections.<Duration>emptyList();
     }
 
     public List<Float> getPrices() {
@@ -65,18 +66,20 @@ public class MenuItem {
     }
 
     public List<String> getSuggestions() {
-        return suggestions != null ? Collections.unmodifiableList(suggestions) : Collections.<String>emptyList();
+        return suggestions != null
+                ? Collections.unmodifiableList(suggestions) : Collections.<String>emptyList();
     }
 
     public List<String> getIngredients() {
-        return ingredients != null ? Collections.unmodifiableList(ingredients) : Collections.<String>emptyList();
+        return ingredients != null
+                ? Collections.unmodifiableList(ingredients) : Collections.<String>emptyList();
     }
 
     public float getCalories() {
         return calories;
     }
 
-    public String getAlcohol() {
+    public float getAlcohol() {
         return alcohol;
     }
 
@@ -85,7 +88,8 @@ public class MenuItem {
     }
 
     public List<Semiotic> getSemiotics() {
-        return semiotics != null ? Collections.unmodifiableList(semiotics) : Collections.<Semiotic>emptyList();
+        return semiotics != null
+                ? Collections.unmodifiableList(semiotics) : Collections.<Semiotic>emptyList();
     }
 
     public String getMillesime() {

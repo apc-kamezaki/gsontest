@@ -4,10 +4,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class Duration {
+    private boolean activate;
     private TimeSlot timeslot;
     private String start;
     private String end;
     private List<DayOfWeek> days;
+
+    public boolean isActivate() {
+        return activate;
+    }
 
     public TimeSlot getTimeslot() {
         return timeslot;

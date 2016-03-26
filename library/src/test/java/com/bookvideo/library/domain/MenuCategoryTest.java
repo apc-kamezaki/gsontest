@@ -46,6 +46,7 @@ public class MenuCategoryTest {
                 .isNotNull()
                 .hasSize(3)
                 .contains("col-1", "col-2", "col-3");
+        assertThat(category.getDurations()).isNotNull().hasSize(1);
         {
             assertThat(category.getItems()).isNotNull().hasSize(3);
             {

@@ -15,6 +15,7 @@ public class MenuCategory {
     private String description;
     private CategoryType type;
     private List<String> typeCols;
+    private List<Duration> durations;
     private List<Item> items;
 
     public String getRestaurantId() {
@@ -38,11 +39,18 @@ public class MenuCategory {
     }
 
     public List<String> getTypeCols() {
-        return typeCols != null ? Collections.unmodifiableList(typeCols) : Collections.<String>emptyList();
+        return typeCols != null
+                ? Collections.unmodifiableList(typeCols) : Collections.<String>emptyList();
+    }
+
+    public List<Duration> getDurations() {
+        return durations != null
+                ? Collections.unmodifiableList(durations) : Collections.<Duration>emptyList();
     }
 
     public List<Item> getItems() {
-        return items != null ? Collections.unmodifiableList(items) : Collections.<Item>emptyList();
+        return items != null
+                ? Collections.unmodifiableList(items) : Collections.<Item>emptyList();
     }
 
     public static class Item {

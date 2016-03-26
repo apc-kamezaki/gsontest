@@ -9,6 +9,8 @@ public class Dashboard {
     @SerializedName("restId")
     private String restaurantId;
     private String title;
+    @SerializedName("desc")
+    private String description;
     private Type type;
     private List<DashboardItem> children;
 
@@ -18,6 +20,10 @@ public class Dashboard {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public Type getType() {
@@ -33,7 +39,7 @@ public class Dashboard {
         @SerializedName("icon")
         private String iconId;
         private Style style;
-        private int arrow;
+        private boolean showArrow;
         private List<Duration> durations;
         private Link link;
 
@@ -49,8 +55,8 @@ public class Dashboard {
             return style;
         }
 
-        public int getArrow() {
-            return arrow;
+        public boolean isShowArrow() {
+            return showArrow;
         }
 
         public List<Duration> getDurations() {

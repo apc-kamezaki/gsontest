@@ -8,19 +8,21 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-public class SemioticConverterAdapter implements DomainConverterAdapter {
+public class ColorValueConverterAdapter implements DomainConverterAdapter {
     @Override
     public void apply(GsonBuilder gsonBuilder) {
-        gsonBuilder.registerTypeAdapter(Semiotic.class, new SemioticConvereter());
+        gsonBuilder.registerTypeAdapter(ColorValue.class, new ColorValueConverter());
     }
 
-    private static class SemioticConvereter implements JsonDeserializer<Semiotic> {
+    private static class ColorValueConverter implements JsonDeserializer<ColorValue> {
 
         @Override
-        public Semiotic deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+        public ColorValue deserialize(
+                JsonElement json, Type typeOfT, JsonDeserializationContext context)
                 throws JsonParseException {
+
             try {
-                return Semiotic.valueOf(json.getAsJsonPrimitive().getAsString().toUpperCase());
+                return ColorValue.getColorInstance(json.getAsString());
             } catch (Exception e) {
                 return null;
             }
