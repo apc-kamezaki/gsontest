@@ -2,6 +2,12 @@ package com.bookvideo.library.domain;
 
 import android.graphics.Color;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSyntaxException;
+
+import org.json.JSONException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,6 +47,20 @@ public class ColorUtil {
                 | Integer.valueOf(hex.substring(2, 4), 16) << 16
                 | Integer.valueOf(hex.substring(4, 6), 16) << 8
                 | Integer.valueOf(hex.substring(6, 8), 16);
+    }
+
+    public static int getFromJsonElement(JsonElement element) throws JsonSyntaxException {
+        if (!element.isJsonPrimitive()) {
+            throw new JsonSyntaxException("not primitive value");
+        }
+        JsonPrimitive primitive = element.getAsJsonPrimitive();
+        if (primitive.isNumber()) {
+            return primitive.getAsInt();
+        } else if (primitive.isString()) {
+            return fromString(primitive.getAsString());
+        } else {
+            throw new JsonSyntaxException("not color value");
+        }
     }
 
     public static int fromString(String str) {

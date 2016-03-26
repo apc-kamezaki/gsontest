@@ -38,15 +38,20 @@ public class Style {
     public static class Background {
         @SerializedName("image")
         private String imageId;
-        private int color;
+        private ImageSize imageSize;
+        private ColorValue color;
         private Type type = defaultType;
 
         public String getImageId() {
             return imageId;
         }
 
+        public ImageSize getImageSize() {
+            return imageSize;
+        }
+
         public int getColor() {
-            return color;
+            return color != null ? color.getColor() : 0;
         }
 
         public Type getType() {
@@ -72,11 +77,12 @@ public class Style {
         @SerializedName("bgImg")
         private String backgroundImageId;
         @SerializedName("bgColor")
-        private int backgroundColor;
-        private int color;
+        private ColorValue backgroundColor;
+        private int width;
+        private ColorValue color;
         private Align align = defaultAlign;
         private LabelStyle style = defaultLabelStyle;
-        private int borderColor;
+        private ColorValue borderColor;
         private int borderSize;
 
         public String getBackgroundImageId() {
@@ -84,11 +90,15 @@ public class Style {
         }
 
         public int getBackgroundColor() {
-            return backgroundColor;
+            return backgroundColor != null ? backgroundColor.getColor() : 0;
+        }
+
+        public int getWidth() {
+            return width;
         }
 
         public int getColor() {
-            return color;
+            return color != null ? color.getColor() : 0;
         }
 
         public Align getAlign() {
@@ -100,7 +110,7 @@ public class Style {
         }
 
         public int getBorderColor() {
-            return borderColor;
+            return borderColor != null ? borderColor.getColor() : 0;
         }
 
         public int getBorderSize() {
@@ -111,7 +121,7 @@ public class Style {
     public static class Font {
         private String name;
         private int size;
-        private int color;
+        private ColorValue color;
         private int letterSpacing;
         private Align align = defaultAlign;
 
@@ -124,7 +134,7 @@ public class Style {
         }
 
         public int getColor() {
-            return color;
+            return color != null ? color.getColor() : 0;
         }
 
         public int getLetterSpacing() {

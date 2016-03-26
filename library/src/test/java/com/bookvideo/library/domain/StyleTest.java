@@ -31,7 +31,8 @@ public class StyleTest {
         {
             assertThat(style.getBackground()).isNotNull();
             assertThat(style.getBackground().getImageId()).isEqualTo("bg_id");
-            assertThat(style.getBackground().getColor()).isEqualTo(1);
+            assertThat(style.getBackground().getImageSize()).isEqualTo(ImageSize.FULL);
+            assertThat(style.getBackground().getColor()).isEqualTo(0x7f7f7f7f);
             assertThat(style.getBackground().getType()).isEqualTo(Style.Type.WIDE);
         }
 
@@ -48,6 +49,7 @@ public class StyleTest {
             assertThat(style.getLabel().getBackgroundImageId())
                     .isNotNull()
                     .isEqualTo("label_bg_id");
+            assertThat(style.getLabel().getWidth()).isEqualTo(100);
             assertThat(style.getLabel().getBackgroundColor()).isEqualTo(2);
             assertThat(style.getLabel().getColor()).isEqualTo(3);
             assertThat(style.getLabel().getAlign()).isEqualTo(Style.Align.CENTER);
@@ -61,7 +63,7 @@ public class StyleTest {
             assertThat(style.getFont()).isNotNull();
             assertThat(style.getFont().getName()).isEqualTo("font_name");
             assertThat(style.getFont().getSize()).isEqualTo(40);
-            assertThat(style.getFont().getColor()).isEqualTo(5);
+            assertThat(style.getFont().getColor()).isEqualTo(0xff000000);
             assertThat(style.getFont().getAlign()).isEqualTo(Style.Align.RIGHT);
             assertThat(style.getFont().getLetterSpacing()).isEqualTo(10);
         }

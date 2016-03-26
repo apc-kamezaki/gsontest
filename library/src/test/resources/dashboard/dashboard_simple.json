@@ -1,6 +1,7 @@
 {
   "restId": "dashboard_id",
   "title": "dashboard title",
+  "desc": "dashboard description",
   "type": "grid",
   "children":[
     {
@@ -20,7 +21,7 @@
         "target": "target0",
         "data": "data0"
       },
-      "arrow": 10
+      "showArrow": false
     },
     {
       "order": 1,
@@ -36,7 +37,7 @@
         "type": "content",
         "target": "target1"
       },
-      "arrow": 20
+      "showArrow": true
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
   "img": "logo image id",
-  "bgColor": 10,
+  "bgColor": "rgba(0,127,127,0.5)",
   "type": "wide"
 }

@@ -2,6 +2,7 @@
   "restId": "content_restaurant_id",
   "title": "title1",
   "type": "content",
+  "desc": "description",
   "style": {
     "bg": {
       "color": 1,
@@ -12,11 +13,12 @@
       "v": 20
     }
   },
+  "showPageTitle": true,
   "pages" : [
     {
       "title": "page1",
       "order": 10,
-      "durations": [
+      "events": [
         {
           "start": "20160301",
           "end": "20160331"
@@ -48,6 +50,7 @@
           "type": "image",
           "order": 200,
           "text": "item 2-1",
+          "showArrow": true,
           "style": {
             "bg": {
               "image": "bg_id",
@@ -60,6 +63,7 @@
           "type": "contact",
           "order": 210,
           "text": "item 2-2",
+          "showArrow": false,
           "style": {
             "font": {
               "name": "font_name",

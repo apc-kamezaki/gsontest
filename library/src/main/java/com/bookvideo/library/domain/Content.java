@@ -9,8 +9,11 @@ public class Content {
     @SerializedName("restId")
     private String restaurantId;
     private String title;
+    @SerializedName("desc")
+    private String description;
     private ContentType type;
     private Style style;
+    private boolean showPageTitle;
     private List<ContentPage> pages;
 
     public String getRestaurantId() {
@@ -21,12 +24,20 @@ public class Content {
         return title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public ContentType getType() {
         return type;
     }
 
     public Style getStyle() {
         return style;
+    }
+
+    public boolean isShowPageTitle() {
+        return showPageTitle;
     }
 
     public List<ContentPage> getPages() {
@@ -36,7 +47,7 @@ public class Content {
     public static class ContentPage {
         private String title;
         private int order;
-        private List<Duration> durations;
+        private List<Duration> events;
         List<ContentItem> children;
 
         public String getTitle() {
@@ -47,8 +58,8 @@ public class Content {
             return order;
         }
 
-        public List<Duration> getDurations() {
-            return durations != null ? Collections.unmodifiableList(durations) : Collections.<Duration>emptyList();
+        public List<Duration> getEvents() {
+            return events != null ? Collections.unmodifiableList(events) : Collections.<Duration>emptyList();
         }
 
         public List<ContentItem> getChildren() {
@@ -61,6 +72,7 @@ public class Content {
         private int order;
         private String text;
         private Style style;
+        private boolean showArrow;
 
         public ContentItemType getType() {
             return type;
@@ -78,6 +90,9 @@ public class Content {
             return style;
         }
 
+        public boolean isShowArrow() {
+            return showArrow;
+        }
     }
 
     public enum ContentType {

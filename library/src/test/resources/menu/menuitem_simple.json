@@ -16,9 +16,11 @@
     "size": "half",
     "desc": "Info description"
   },
-  "duration": {
-    "days": [ "sa", "su" ]
-  },
+  "durations": [
+    {
+      "days": [ "sa", "su" ]
+    }
+  ],
   "prices":[
     3.0, 0.0, 5.0
   ],
@@ -29,7 +31,7 @@
     "ingredients1", "ingredients2", "ingredients3", "ingredients4"
   ],
   "calories": 321.0,
-  "alcohol": "Alcohol string",
+  "alcohol": 12.4,
   "alg": [
     "nuts"
   ],

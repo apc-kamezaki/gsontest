@@ -29,6 +29,7 @@ public class MenuTest {
         assertThat(menu).isNotNull();
         assertThat(menu.getRestaurantId()).isEqualTo("menu_id");
         assertThat(menu.getTitle()).isEqualTo("menu title");
+        assertThat(menu.getDescription()).isEqualTo("menu description");
         {
             // style
             Style style = menu.getStyle();

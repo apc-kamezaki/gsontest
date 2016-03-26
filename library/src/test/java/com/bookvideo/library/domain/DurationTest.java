@@ -31,6 +31,7 @@ public class DurationTest {
         }
 
         assertThat(duration).isNotNull();
+        assertThat(duration.isActivate()).isTrue();
         assertThat(duration.getTimeslot()).isEqualTo(Duration.TimeSlot.ALLDAY);
         assertThat(duration.getStart()).isEqualTo("Start day");
         assertThat(duration.getEnd()).isEqualTo("End day");

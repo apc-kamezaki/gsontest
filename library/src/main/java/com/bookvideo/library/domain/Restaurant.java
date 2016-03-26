@@ -1,5 +1,7 @@
 package com.bookvideo.library.domain;
 
+import android.graphics.Color;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Collections;
@@ -8,14 +10,15 @@ import java.util.List;
 public class Restaurant {
     public static LogoStyleType defaultLogoStyleType = LogoStyleType.ICON;
 
+    private String clientId;
     private String name;
     private String url;
     private String address;
     private String postCode;
     private String phoneNumber;
     private String email;
-    @SerializedName("geo")
-    private String geoId;
+    @SerializedName("loc")
+    private Location location;
     private String currency;
     @SerializedName("lang")
     private List<String> languages;
@@ -24,12 +27,17 @@ public class Restaurant {
     private HeaderStyle headerStyle;
     @SerializedName("lStyle")
     private LogoStyle logoStyle;
-    private int themeColor;
+    private ColorValue themeColor;
+    private boolean useDuration;
     private boolean useBasket;
     private boolean showPrice;
     private Link entryPoint;
     private Style style;
     private List<SideMenu> sideMenu;
+
+    public String getClientId() {
+        return clientId;
+    }
 
     public String getName() {
         return name;
@@ -55,8 +63,8 @@ public class Restaurant {
         return email;
     }
 
-    public String getGeoId() {
-        return geoId;
+    public Location getLocation() {
+        return location;
     }
 
     public String getCurrency() {
@@ -80,7 +88,11 @@ public class Restaurant {
     }
 
     public int getThemeColor() {
-        return themeColor;
+        return themeColor != null ? themeColor.getColor() : 0;
+    }
+
+    public boolean isUseDuration() {
+        return useDuration;
     }
 
     public boolean isUseBasket() {
@@ -106,9 +118,9 @@ public class Restaurant {
     public static class HeaderStyle {
         @SerializedName("img")
         private String imageId;
-        private int color;
+        private ColorValue color;
         @SerializedName("bgColor")
-        private int backgroundColor;
+        private ColorValue backgroundColor;
         private String backLabel;
         private String homeLabel;
 
@@ -117,11 +129,11 @@ public class Restaurant {
         }
 
         public int getColor() {
-            return color;
+            return color != null ? color.getColor() : 0;
         }
 
         public int getBackgroundColor() {
-            return backgroundColor;
+            return backgroundColor != null ? backgroundColor.getColor() : 0;
         }
 
         public String getBackLabel() {
@@ -136,7 +148,7 @@ public class Restaurant {
         @SerializedName("img")
         private String imageId;
         @SerializedName("bgColor")
-        private int backgroundColor;
+        private ColorValue backgroundColor;
         private LogoStyleType type;
 
         public String getImageId() {
@@ -144,7 +156,7 @@ public class Restaurant {
         }
 
         public int getBackgroundColor() {
-            return backgroundColor;
+            return backgroundColor!= null ? backgroundColor.getColor() : 0;
         }
 
         public LogoStyleType getType() {

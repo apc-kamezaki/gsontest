@@ -1,6 +1,7 @@
 {
   "restId": "menu_id",
   "title": "menu title",
+  "desc": "menu description",
   "style": {
     "label": {
       "bgColor": 2,

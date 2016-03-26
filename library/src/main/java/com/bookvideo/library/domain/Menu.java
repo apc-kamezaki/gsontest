@@ -9,6 +9,8 @@ public class Menu {
     @SerializedName("restId")
     private String restaurantId;
     private String title;
+    @SerializedName("desc")
+    private String description;
     private Style style;
     private List<Page> pages;
 
@@ -18,6 +20,10 @@ public class Menu {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public Style getStyle() {

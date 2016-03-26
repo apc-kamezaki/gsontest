@@ -5,7 +5,10 @@
   "postCode": "xxx-000",
   "phoneNumber": "000-123-456",
   "email": "info@zero.example.com",
-  "geo": "geo schema id",
+  "loc": {
+    "_id": "location_1",
+    "name": "location name"
+  },
   "currency": "USD",
   "lang": [ "en", "fr"],
   "services": [
@@ -34,7 +37,8 @@
     "bgColor": 10,
     "type": "icon"
   },
-  "themeColor": 100,
+  "themeColor": "rgba(255,255,0, 1.0)",
+  "useDuration": true,
   "useBasket": true,
   "showPrice": false,
   "entryPoint": {

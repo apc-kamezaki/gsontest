@@ -1,7 +1,7 @@
 {
   "img": "Header image id",
-  "color": 10,
-  "bgColor": 20,
+  "color": "rgba(255,0,1,1.0)",
+  "bgColor": "rgba(255,255,255,1)",
   "backLabel": "BACK",
   "homeLabel": "HOME"
 }

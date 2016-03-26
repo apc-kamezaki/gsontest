@@ -36,7 +36,8 @@ public class RestaurantTest {
         assertThat(restaurant.getPostCode()).isEqualTo("xxx-000");
         assertThat(restaurant.getPhoneNumber()).isEqualTo("000-123-456");
         assertThat(restaurant.getEmail()).isEqualTo("info@zero.example.com");
-        assertThat(restaurant.getGeoId()).isEqualTo("geo schema id");
+        assertThat(restaurant.getLocation()).isNotNull();
+        assertThat(restaurant.getLocation().getName()).isEqualTo("location name");
         assertThat(restaurant.getCurrency()).isEqualTo("USD");
         assertThat(restaurant.getLanguages()).isNotNull().hasSize(2).contains("en", "fr");
         assertThat(restaurant.getServices()).isNotNull().hasSize(2);
@@ -59,7 +60,8 @@ public class RestaurantTest {
         assertThat(restaurant.getHeaderStyle().getBackLabel()).isEqualTo("BACK");
         assertThat(restaurant.getLogoStyle()).isNotNull();
         assertThat(restaurant.getLogoStyle().getType()).isEqualTo(Restaurant.LogoStyleType.ICON);
-        assertThat(restaurant.getThemeColor()).isEqualTo(100);
+        assertThat(restaurant.getThemeColor()).isEqualTo(0xffffff00);
+        assertThat(restaurant.isUseDuration()).isTrue();
         assertThat(restaurant.isUseBasket()).isTrue();
         assertThat(restaurant.isShowPrice()).isFalse();
         assertThat(restaurant.getEntryPoint()).isNotNull();
@@ -95,8 +97,8 @@ public class RestaurantTest {
 
         assertThat(headerStyle).isNotNull();
         assertThat(headerStyle.getImageId()).isEqualTo("Header image id");
-        assertThat(headerStyle.getColor()).isEqualTo(10);
-        assertThat(headerStyle.getBackgroundColor()).isEqualTo(20);
+        assertThat(headerStyle.getColor()).isEqualTo(0xffff0001);
+        assertThat(headerStyle.getBackgroundColor()).isEqualTo(0xffffffff);
         assertThat(headerStyle.getBackLabel()).isEqualTo("BACK");
         assertThat(headerStyle.getHomeLabel()).isEqualTo("HOME");
     }
@@ -111,7 +113,7 @@ public class RestaurantTest {
 
         assertThat(logoStyle).isNotNull();
         assertThat(logoStyle.getImageId()).isEqualTo("logo image id");
-        assertThat(logoStyle.getBackgroundColor()).isEqualTo(10);
+        assertThat(logoStyle.getBackgroundColor()).isEqualTo(0x7f007f7f);
         assertThat(logoStyle.getType()).isEqualTo(Restaurant.LogoStyleType.WIDE);
     }
 
